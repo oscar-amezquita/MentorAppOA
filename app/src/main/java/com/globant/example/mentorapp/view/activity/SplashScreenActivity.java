@@ -1,4 +1,4 @@
-package com.globant.example.mentorapp.view.activities;
+package com.globant.example.mentorapp.view.activity;
 
 import java.util.Timer;
 import java.util.TimerTask;
