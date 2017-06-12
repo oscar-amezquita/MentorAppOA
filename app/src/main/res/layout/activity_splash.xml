@@ -4,14 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.globant.example.mentorapp.view.activity.SplashScreenActivity">
+    tools:context=".presentation.view.activity.SplashScreenActivity">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageSplash"
         android:layout_width="@dimen/splash_icon_width"
         android:layout_height="@dimen/splash_icon_height"
         android:scaleType="centerInside"
         app:srcCompat="@drawable/ic_github_logo_smartobject"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:id="@+id/txtSplash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageSplash"
+        android:layout_centerHorizontal="true"
+        android:text="@string/splash_text"
+        android:textAppearance="@style/TextAppearance.AppCompat.Button" />
 </RelativeLayout>
