@@ -4,6 +4,8 @@ import com.globant.example.mentorapp.data.entity.UserEntity;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * Interface to define List of users  basic behaviors
  * Created by oscar.amezquita on 9/06/2017.
@@ -11,7 +13,7 @@ import java.util.List;
 
 public interface ListUsersInterface {
 
-    void UsersReady(List<UserEntity> allUsers);
+    void UsersReady();
 
-    void UsersError(String message);
+    void UsersError();
 }

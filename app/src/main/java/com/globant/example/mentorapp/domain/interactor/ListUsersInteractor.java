@@ -1,5 +1,6 @@
 package com.globant.example.mentorapp.domain.interactor;
 
+import com.globant.example.mentorapp.presentation.model.SharedUserViewModel;
 import com.globant.example.mentorapp.presentation.view.fragment.ListUsersInterface;
 
 import retrofit2.Retrofit;
@@ -10,6 +11,6 @@ import retrofit2.Retrofit;
 
 public interface ListUsersInteractor {
 
-    void getUsersListFromService(ListUsersInterface listener, Retrofit client);
+    void getUsersListFromService(SharedUserViewModel model);
 
 }

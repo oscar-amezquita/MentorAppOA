@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import com.globant.example.mentorapp.MentorApplication;
 import com.globant.example.mentorapp.R;
 import com.globant.example.mentorapp.data.entity.UserEntity;
-import com.globant.example.mentorapp.domain.interactor.ListUsersInteractorImpl;
 import com.globant.example.mentorapp.presentation.model.SharedUserViewModel;
 import com.globant.example.mentorapp.presentation.presenter.ListUsersPresenterImpl;
 import com.globant.example.mentorapp.presentation.view.activity.HomeScreenActivity;
@@ -24,8 +23,6 @@ import com.globant.example.mentorapp.presentation.view.adapter.ListUsersAdapter;
 import java.util.List;
 
 import javax.inject.Inject;
-
-import retrofit2.Retrofit;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -37,19 +34,16 @@ public class ListUsersFragment extends LifecycleFragment implements ListUsersInt
     public SharedUserViewModel model;
     @Inject
     protected LinearLayoutManager mLayoutManager;
-    @Inject
-    protected Retrofit retrofitClient;
-    @Inject
-    protected ListUsersInteractorImpl userInteractor;
     protected ListUsersAdapter listUsersAdapter;
-    private ListUsersPresenterImpl presenter;
+    @Inject
+    public ListUsersPresenterImpl presenter;
 
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = new ListUsersPresenterImpl(this);
         ((MentorApplication) getActivity().getApplicationContext()).getUserComponent().inject(this);
+
 
     }
 
@@ -59,7 +53,7 @@ public class ListUsersFragment extends LifecycleFragment implements ListUsersInt
         View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
         model = ViewModelProviders.of(this).get(SharedUserViewModel.class);
         if (model.getUsers() == null || model.getUsers().getValue() == null) {
-            presenter.getUsersFromService(retrofitClient, userInteractor);
+            presenter.getUsersFromService(this, model);
             subscribe();
 
         } else {
@@ -76,17 +70,14 @@ public class ListUsersFragment extends LifecycleFragment implements ListUsersInt
 
 
     @Override
-    public void UsersReady(List<UserEntity> allUsers) {
-        ((HomeScreenActivity) getContext()).simpleSnackbarMessage("Users Count:" + allUsers.size());
-        model.setUsers(allUsers);
-        listUsersAdapter = new ListUsersAdapter(allUsers, getContext());
+    public void UsersReady() {
+        mRecyclerView.setAdapter(listUsersAdapter);
         listUsersAdapter.notifyDataSetChanged();
-
     }
 
     @Override
-    public void UsersError(String message) {
-        ((HomeScreenActivity) getActivity()).simpleSnackbarMessage(message);
+    public void UsersError() {
+        ((HomeScreenActivity) getActivity()).simpleSnackbarMessage(getString(R.string.communication_error_message));
 
     }
 
@@ -102,5 +93,15 @@ public class ListUsersFragment extends LifecycleFragment implements ListUsersInt
         model.getUsers().observe(this, usersObserver);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.onResume();
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        presenter.onPause();
+    }
 }

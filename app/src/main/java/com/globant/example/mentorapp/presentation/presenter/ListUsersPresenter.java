@@ -1,6 +1,10 @@
 package com.globant.example.mentorapp.presentation.presenter;
 
+import android.support.annotation.NonNull;
+
 import com.globant.example.mentorapp.domain.interactor.ListUsersInteractorImpl;
+import com.globant.example.mentorapp.presentation.model.SharedUserViewModel;
+import com.globant.example.mentorapp.presentation.view.fragment.ListUsersFragment;
 
 import retrofit2.Retrofit;
 
@@ -11,5 +15,6 @@ import retrofit2.Retrofit;
 
 public interface ListUsersPresenter {
 
-    void getUsersFromService(Retrofit client, ListUsersInteractorImpl interactor);
+    void getUsersFromService(@NonNull ListUsersFragment listUsersFragment, SharedUserViewModel model);
+
 }

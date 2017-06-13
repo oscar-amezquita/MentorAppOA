@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.globant.example.mentorapp.presentation.di.Component.DaggerUserComponent;
 import com.globant.example.mentorapp.presentation.di.Component.UserComponent;
-import com.globant.example.mentorapp.presentation.di.Module.UserModule;
+import com.globant.example.mentorapp.presentation.di.Module.ListUsersModule;
 
 /**
  * Created by oscar.amezquita on 8/06/2017.
@@ -12,12 +12,12 @@ import com.globant.example.mentorapp.presentation.di.Module.UserModule;
 
 public class MentorApplication extends Application {
 
-    private UserComponent userComponent;
+    protected UserComponent userComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        userComponent = DaggerUserComponent.builder().userModule(new UserModule(this)).build();
+        userComponent = DaggerUserComponent.builder().listUsersModule(new ListUsersModule(this)).build();
     }
 
     public UserComponent getUserComponent() {
