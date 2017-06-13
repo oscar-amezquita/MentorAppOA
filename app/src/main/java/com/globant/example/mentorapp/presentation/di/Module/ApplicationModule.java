@@ -33,12 +33,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by oscar.amezquita on 8/06/2017.
  */
 @Module
-public class ListUsersModule {
+public class ApplicationModule {
 
     public Context context;
     public MentorApplication application;
 
-    public ListUsersModule(MentorApplication application) {
+    public ApplicationModule(MentorApplication application) {
         this.context = application;
         this.application = application;
     }
@@ -61,8 +61,9 @@ public class ListUsersModule {
     }
 
     @Provides
+    @Singleton
     protected ListUsersInteractorImpl provideUserInteractor() {
-        return new ListUsersInteractorImpl(application.getUserComponent());
+        return new ListUsersInteractorImpl(application.getApplicationComponent());
     }
 
     @Provides
@@ -73,7 +74,7 @@ public class ListUsersModule {
     @Provides
     @Singleton
     ListUsersPresenterImpl provideListUsersPresenter() {
-        return new ListUsersPresenterImpl(application.getUserComponent());
+        return new ListUsersPresenterImpl(application.getApplicationComponent());
     }
 
     @Provides
@@ -86,7 +87,7 @@ public class ListUsersModule {
     @Provides
     @Singleton
     public APIClient providesApiClient() {
-        return new APIClient(application.getUserComponent());
+        return new APIClient(application.getApplicationComponent());
     }
 
     @Provides
@@ -104,19 +105,19 @@ public class ListUsersModule {
 
     @Provides
     @Singleton
-    Bus provideBus() {
+    public Bus provideBus() {
         return new Bus(ThreadEnforcer.ANY);
     }
 
     @Provides
     @Singleton
-    SharedUserViewModel providesSharedUserViewModel() {
-        return new SharedUserViewModel(application.getUserComponent());
+    public SharedUserViewModel providesSharedUserViewModel() {
+        return new SharedUserViewModel(application.getApplicationComponent());
     }
 
     @Provides
     @Singleton
-    MutableLiveData<List<UserEntity>> provideLiveData() {
+    public MutableLiveData<List<UserEntity>> provideLiveData() {
         return new MutableLiveData<>();
     }
 

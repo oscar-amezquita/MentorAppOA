@@ -2,9 +2,9 @@ package com.globant.example.mentorapp.presentation.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.globant.example.mentorapp.data.util.ApiUtils;
+import com.globant.example.mentorapp.data.entity.EventApiResponseEntity;
 import com.globant.example.mentorapp.domain.interactor.ListUsersInteractorImpl;
-import com.globant.example.mentorapp.presentation.di.Component.UserComponent;
+import com.globant.example.mentorapp.presentation.di.Component.ApplicationComponent;
 import com.globant.example.mentorapp.presentation.model.SharedUserViewModel;
 import com.globant.example.mentorapp.presentation.view.fragment.ListUsersFragment;
 import com.squareup.otto.Bus;
@@ -21,13 +21,11 @@ public class ListUsersPresenterImpl implements ListUsersPresenter {
 
     @Inject
     ListUsersInteractorImpl interactor;
-
-    private ListUsersFragment listUsersFragment;
-
     @Inject
     Bus bus;
+    private ListUsersFragment listUsersFragment;
 
-    public ListUsersPresenterImpl(UserComponent component) {
+    public ListUsersPresenterImpl(ApplicationComponent component) {
         component.inject(this);
     }
 
@@ -39,22 +37,25 @@ public class ListUsersPresenterImpl implements ListUsersPresenter {
     }
 
     @Subscribe
-    public void controlResponse(String result) {
-        switch (result) {
-            case ApiUtils.SERVICE_RESPONSE_OK:
-                listUsersFragment.UsersReady();
+    public void controlResponse(EventApiResponseEntity result) {
+        switch (result.getResponseCode()) {
+            case EventApiResponseEntity.HTTP_OK:
+                listUsersFragment.usersReady();
+                break;
+            case EventApiResponseEntity.CONNECTION_ERROR:
+                listUsersFragment.usersErrorConnectivity();
                 break;
             default:
-                listUsersFragment.UsersError();
+                listUsersFragment.usersErrorHttp();
                 break;
         }
     }
 
-    public void onResume() {
+    public void registerBus() {
         bus.register(this);
     }
 
-    public void onPause() {
+    public void unregisterBus() {
         bus.unregister(this);
     }
 

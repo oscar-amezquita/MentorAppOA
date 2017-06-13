@@ -15,6 +15,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
+ * Custom adapter to show General data fro users.
  * Created by oscar.amezquita on 8/06/2017.
  */
 
@@ -30,13 +31,13 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_users_adapter, null);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_users_adapter, parent);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTextView.setText(users.get(position).getLogin());
+        holder.userNameTextView.setText(users.get(position).getLogin());
         if (!users.get(position).getAvatarUrl().isEmpty()) {
             Picasso.with(context).load(users.get(position).getAvatarUrl()).error(R.drawable.ic_not_found).into(holder.userImage);
         } else {
@@ -46,18 +47,17 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
     @Override
     public int getItemCount() {
-        return users != null ? users.size() : -1;
+        return users != null ? users.size() : R.integer.zero_constant;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView mTextView;
-        public ImageView userImage;
-
+        private TextView userNameTextView;
+        private ImageView userImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mTextView = (TextView) itemView.findViewById(R.id.textName);
+            userNameTextView = (TextView) itemView.findViewById(R.id.textName);
             userImage = (ImageView) itemView.findViewById(R.id.imageUser);
         }
 

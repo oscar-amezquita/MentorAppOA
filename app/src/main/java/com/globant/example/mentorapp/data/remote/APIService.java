@@ -5,7 +5,6 @@ import com.globant.example.mentorapp.data.entity.UserEntity;
 import java.util.List;
 
 import retrofit2.Call;
-import retrofit2.http.Field;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -16,7 +15,7 @@ import retrofit2.http.Path;
 
 public interface APIService {
 
-    @GET("/repos/{profileGitHub}/{RepoName}/subscribers")
-    Call<List<UserEntity>> getUsers(@Path("profileGitHub") String userGit, @Path("RepoName") String repoName);
+    @GET("/repos/{profileGitHub}/{repoName}/subscribers")
+    Call<List<UserEntity>> getUsers(@Path("profileGitHub") String userGit, @Path("repoName") String repoName);
 
 }

@@ -2,4 +2,7 @@
 <resources>
     <dimen name="splash_icon_width">220dp</dimen>
     <dimen name="splash_icon_height">120dp</dimen>
+    <dimen name="list_general_margin">10dp</dimen>
+    <dimen name="list_user_image_width">80dp</dimen>
+    <dimen name="list_user_image_height">80dp</dimen>
 </resources>

@@ -1,7 +1,7 @@
 package com.globant.example.mentorapp.domain.interactor;
 
 import com.globant.example.mentorapp.data.remote.APIClient;
-import com.globant.example.mentorapp.presentation.di.Component.UserComponent;
+import com.globant.example.mentorapp.presentation.di.Component.ApplicationComponent;
 import com.globant.example.mentorapp.presentation.model.SharedUserViewModel;
 
 import javax.inject.Inject;
@@ -16,7 +16,7 @@ public class ListUsersInteractorImpl implements ListUsersInteractor {
     @Inject
     APIClient apiClient;
 
-    public ListUsersInteractorImpl(UserComponent component) {
+    public ListUsersInteractorImpl(ApplicationComponent component) {
         component.inject(this);
     }
 

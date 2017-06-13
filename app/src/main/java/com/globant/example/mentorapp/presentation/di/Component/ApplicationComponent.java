@@ -2,7 +2,7 @@ package com.globant.example.mentorapp.presentation.di.Component;
 
 import com.globant.example.mentorapp.data.remote.APIClient;
 import com.globant.example.mentorapp.domain.interactor.ListUsersInteractorImpl;
-import com.globant.example.mentorapp.presentation.di.Module.ListUsersModule;
+import com.globant.example.mentorapp.presentation.di.Module.ApplicationModule;
 import com.globant.example.mentorapp.presentation.model.SharedUserViewModel;
 import com.globant.example.mentorapp.presentation.presenter.ListUsersPresenterImpl;
 import com.globant.example.mentorapp.presentation.view.activity.HomeScreenActivity;
@@ -13,12 +13,13 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 /**
+ * Component class to control dependency injection.
  * Created by oscar.amezquita on 8/06/2017.
  */
 
 @Singleton
-@Component(modules = {ListUsersModule.class})
-public interface UserComponent {
+@Component(modules = {ApplicationModule.class})
+public interface ApplicationComponent {
     void inject(HomeScreenActivity activity);
 
     void inject(ListUsersFragment fragment);

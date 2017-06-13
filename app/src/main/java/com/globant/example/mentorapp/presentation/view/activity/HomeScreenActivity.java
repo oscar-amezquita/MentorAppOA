@@ -13,27 +13,24 @@ import javax.inject.Inject;
 
 public class HomeScreenActivity extends LifecycleActivity {
 
-    private FrameLayout container;
     private final String LIST_TAG = getClass().getSimpleName();
     @Inject
     protected ListUsersFragment listUsersFragment;
+    private FrameLayout container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         container = (FrameLayout) findViewById(R.id.fragment_container);
-        ((MentorApplication) getApplicationContext()).getUserComponent().inject(this);
+        ((MentorApplication) getApplicationContext()).getApplicationComponent().inject(this);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, listUsersFragment, LIST_TAG).commit();
         }
-
     }
 
     public void simpleSnackbarMessage(String message) {
         Snackbar.make(container, message, Snackbar.LENGTH_LONG)
                 .show();
     }
-
-
 }

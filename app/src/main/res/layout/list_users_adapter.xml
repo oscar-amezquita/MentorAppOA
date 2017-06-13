@@ -1,28 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp">
+        android:layout_margin="@dimen/list_general_margin">
 
         <ImageView
             android:id="@+id/imageUser"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:paddingTop="10dp"
+            android:layout_width="@dimen/list_user_image_width"
+            android:layout_height="@dimen/list_user_image_height"
+            android:paddingTop="@dimen/list_general_margin"
             app:srcCompat="@mipmap/ic_launcher" />
 
         <TextView
             android:id="@+id/textName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            android:layout_margin="@dimen/list_general_margin"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            tools:text="UserName" />
     </LinearLayout>
 
 </FrameLayout>

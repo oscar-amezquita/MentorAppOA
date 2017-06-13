@@ -29,22 +29,20 @@ import javax.inject.Inject;
  */
 public class ListUsersFragment extends LifecycleFragment implements ListUsersInterface {
 
-    protected RecyclerView mRecyclerView;
-
     public SharedUserViewModel model;
+    @Inject
+    public ListUsersPresenterImpl presenter;
     @Inject
     protected LinearLayoutManager mLayoutManager;
     protected ListUsersAdapter listUsersAdapter;
     @Inject
-    public ListUsersPresenterImpl presenter;
-    @Inject
     DividerItemDecoration itemDecoration;
-
+    private RecyclerView listUsersRecyclerView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((MentorApplication) getActivity().getApplicationContext()).getUserComponent().inject(this);
+        ((MentorApplication) getActivity().getApplicationContext()).getApplicationComponent().inject(this);
 
 
     }
@@ -61,25 +59,34 @@ public class ListUsersFragment extends LifecycleFragment implements ListUsersInt
         } else {
             listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue(), getContext());
         }
-        mRecyclerView = (RecyclerView) view.findViewById(R.id.list_item_container);
-        mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(itemDecoration);
-        mRecyclerView.setAdapter(listUsersAdapter);
+        listUsersRecyclerView = (RecyclerView) view.findViewById(R.id.list_item_container);
+        listUsersRecyclerView.setHasFixedSize(true);
+        listUsersRecyclerView.setLayoutManager(mLayoutManager);
+        listUsersRecyclerView.addItemDecoration(itemDecoration);
+        listUsersRecyclerView.setAdapter(listUsersAdapter);
         return view;
     }
 
 
     @Override
-    public void UsersReady() {
-        mRecyclerView.setAdapter(listUsersAdapter);
+    public void usersReady() {
+        listUsersRecyclerView.setAdapter(listUsersAdapter);
         listUsersAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void UsersError() {
-        ((HomeScreenActivity) getActivity()).simpleSnackbarMessage(getString(R.string.communication_error_message));
+    public void usersErrorHttp() {
+        snackBarMessage(R.string.http_error_message);
+    }
 
+    @Override
+    public void usersErrorConnectivity() {
+        snackBarMessage(R.string.communication_error_message);
+    }
+
+    @Override
+    public void snackBarMessage(int stringResource) {
+        ((HomeScreenActivity) getActivity()).simpleSnackbarMessage(getString(stringResource));
     }
 
     private void subscribe() {
@@ -87,7 +94,7 @@ public class ListUsersFragment extends LifecycleFragment implements ListUsersInt
             @Override
             public void onChanged(@Nullable List<UserEntity> userEntityList) {
                 listUsersAdapter = new ListUsersAdapter(userEntityList, getContext());
-                mRecyclerView.setAdapter(listUsersAdapter);
+                listUsersRecyclerView.setAdapter(listUsersAdapter);
                 listUsersAdapter.notifyDataSetChanged();
             }
         };
@@ -97,12 +104,12 @@ public class ListUsersFragment extends LifecycleFragment implements ListUsersInt
     @Override
     public void onResume() {
         super.onResume();
-        presenter.onResume();
+        presenter.registerBus();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        presenter.onPause();
+        presenter.unregisterBus();
     }
 }
