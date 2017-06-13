@@ -37,6 +37,8 @@ public class ListUsersFragment extends LifecycleFragment implements ListUsersInt
     protected ListUsersAdapter listUsersAdapter;
     @Inject
     public ListUsersPresenterImpl presenter;
+    @Inject
+    DividerItemDecoration itemDecoration;
 
 
     @Override
@@ -62,8 +64,7 @@ public class ListUsersFragment extends LifecycleFragment implements ListUsersInt
         mRecyclerView = (RecyclerView) view.findViewById(R.id.list_item_container);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.addItemDecoration(
-                new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        mRecyclerView.addItemDecoration(itemDecoration);
         mRecyclerView.setAdapter(listUsersAdapter);
         return view;
     }

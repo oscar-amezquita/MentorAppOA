@@ -2,17 +2,13 @@ package com.globant.example.mentorapp.presentation.presenter;
 
 import android.support.annotation.NonNull;
 
-import com.globant.example.mentorapp.data.entity.UserEntity;
 import com.globant.example.mentorapp.data.util.ApiUtils;
 import com.globant.example.mentorapp.domain.interactor.ListUsersInteractorImpl;
 import com.globant.example.mentorapp.presentation.di.Component.UserComponent;
 import com.globant.example.mentorapp.presentation.model.SharedUserViewModel;
 import com.globant.example.mentorapp.presentation.view.fragment.ListUsersFragment;
-import com.globant.example.mentorapp.presentation.view.fragment.ListUsersInterface;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -25,8 +21,6 @@ public class ListUsersPresenterImpl implements ListUsersPresenter {
 
     @Inject
     ListUsersInteractorImpl interactor;
-
-    private ListUsersInterface listener;
 
     private ListUsersFragment listUsersFragment;
 

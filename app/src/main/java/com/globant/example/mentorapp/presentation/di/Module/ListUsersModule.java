@@ -1,10 +1,12 @@
 package com.globant.example.mentorapp.presentation.di.Module;
 
-import android.arch.lifecycle.ViewModelProviders;
+import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.globant.example.mentorapp.MentorApplication;
+import com.globant.example.mentorapp.data.entity.UserEntity;
 import com.globant.example.mentorapp.data.remote.APIClient;
 import com.globant.example.mentorapp.data.util.ApiUtils;
 import com.globant.example.mentorapp.domain.interactor.ListUsersInteractorImpl;
@@ -14,6 +16,7 @@ import com.globant.example.mentorapp.presentation.view.fragment.ListUsersFragmen
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
@@ -82,7 +85,7 @@ public class ListUsersModule {
 
     @Provides
     @Singleton
-    public APIClient providesApiClient(){
+    public APIClient providesApiClient() {
         return new APIClient(application.getUserComponent());
     }
 
@@ -105,4 +108,21 @@ public class ListUsersModule {
         return new Bus(ThreadEnforcer.ANY);
     }
 
+    @Provides
+    @Singleton
+    SharedUserViewModel providesSharedUserViewModel() {
+        return new SharedUserViewModel(application.getUserComponent());
+    }
+
+    @Provides
+    @Singleton
+    MutableLiveData<List<UserEntity>> provideLiveData() {
+        return new MutableLiveData<>();
+    }
+
+    @Provides
+    @Singleton
+    DividerItemDecoration providetemDecoration() {
+        return new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+    }
 }

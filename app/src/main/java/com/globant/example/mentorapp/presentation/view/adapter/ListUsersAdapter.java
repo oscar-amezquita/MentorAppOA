@@ -31,16 +31,15 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_users_adapter, null);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+        return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTextView.setText(users.get(position).getLogin());
-        if(!users.get(position).getAvatarUrl().isEmpty()) {
+        if (!users.get(position).getAvatarUrl().isEmpty()) {
             Picasso.with(context).load(users.get(position).getAvatarUrl()).error(R.drawable.ic_not_found).into(holder.userImage);
-        }else{
+        } else {
             holder.userImage.setImageResource(R.drawable.ic_not_found);
         }
     }
