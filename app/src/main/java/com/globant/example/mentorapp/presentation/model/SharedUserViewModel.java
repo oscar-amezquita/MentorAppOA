@@ -5,11 +5,8 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.globant.example.mentorapp.data.entity.UserEntity;
-import com.globant.example.mentorapp.presentation.di.Component.ApplicationComponent;
 
 import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  * ViewModel Class to control data between activity, fragments and his states.
@@ -18,13 +15,8 @@ import javax.inject.Inject;
 
 public class SharedUserViewModel extends ViewModel {
 
-    @Inject
-    MutableLiveData<List<UserEntity>> users;
 
-    public SharedUserViewModel(ApplicationComponent component) {
-        component.inject(this);
-    }
-
+    private MutableLiveData<List<UserEntity>> users = new MutableLiveData<>();
 
     public LiveData<List<UserEntity>> getUsers() {
         return users;

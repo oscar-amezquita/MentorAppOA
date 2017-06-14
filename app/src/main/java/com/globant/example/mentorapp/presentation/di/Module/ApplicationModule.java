@@ -6,11 +6,11 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.globant.example.mentorapp.MentorApplication;
+import com.globant.example.mentorapp.data.entity.EventApiResponseEntity;
 import com.globant.example.mentorapp.data.entity.UserEntity;
 import com.globant.example.mentorapp.data.remote.APIClient;
 import com.globant.example.mentorapp.data.util.ApiUtils;
 import com.globant.example.mentorapp.domain.interactor.ListUsersInteractorImpl;
-import com.globant.example.mentorapp.presentation.model.SharedUserViewModel;
 import com.globant.example.mentorapp.presentation.presenter.ListUsersPresenterImpl;
 import com.globant.example.mentorapp.presentation.view.fragment.ListUsersFragment;
 import com.squareup.otto.Bus;
@@ -111,12 +111,6 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public SharedUserViewModel providesSharedUserViewModel() {
-        return new SharedUserViewModel(application.getApplicationComponent());
-    }
-
-    @Provides
-    @Singleton
     public MutableLiveData<List<UserEntity>> provideLiveData() {
         return new MutableLiveData<>();
     }
@@ -125,5 +119,11 @@ public class ApplicationModule {
     @Singleton
     DividerItemDecoration providetemDecoration() {
         return new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+    }
+
+    @Provides
+    @Singleton
+    public EventApiResponseEntity provideResponseEntity() {
+        return new EventApiResponseEntity(0, "");
     }
 }

@@ -31,7 +31,7 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_users_adapter, parent);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_users_adapter, null);
         return new ViewHolder(view);
     }
 

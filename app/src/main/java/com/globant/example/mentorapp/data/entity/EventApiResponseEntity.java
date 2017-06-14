@@ -22,9 +22,16 @@ public class EventApiResponseEntity {
         return responseText;
     }
 
+    public void setResponseText(String responseText) {
+        this.responseText = responseText;
+    }
+
     public int getResponseCode() {
 
         return responseCode;
     }
 
+    public void setResponseCode(int responseCode) {
+        this.responseCode = responseCode;
+    }
 }

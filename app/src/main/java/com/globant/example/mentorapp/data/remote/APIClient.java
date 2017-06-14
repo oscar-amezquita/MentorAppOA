@@ -29,6 +29,8 @@ public class APIClient {
     Retrofit client;
     @Inject
     Bus bus;
+    @Inject
+    EventApiResponseEntity responseEntity;
 
     public APIClient(ApplicationComponent component) {
         component.inject(this);
@@ -42,12 +44,13 @@ public class APIClient {
         client.create(APIService.class).getUsers(ApiUtils.PROFILE_NAME_GITHUB, ApiUtils.PROFILE_REPOSITORY).enqueue(new Callback<List<UserEntity>>() {
             @Override
             public void onResponse(@NonNull Call<List<UserEntity>> call, @NonNull Response<List<UserEntity>> response) {
+                responseEntity.setResponseText(response.message());
+                responseEntity.setResponseCode(response.code());
                 if (response.isSuccessful()) {
+                    responseEntity.setResponseCode(EventApiResponseEntity.HTTP_OK);
                     model.setUsers(response.body());
-                    bus.post(new EventApiResponseEntity(response.code(), response.message()));
-                } else {
-                    bus.post(new EventApiResponseEntity(response.code(), response.message()));
                 }
+                bus.post(responseEntity);
             }
 
             @Override

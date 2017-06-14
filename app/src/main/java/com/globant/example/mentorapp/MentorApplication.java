@@ -18,7 +18,7 @@ public class MentorApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        applicationComponent = DaggerApplicationComponent.builder().listUsersModule(new ApplicationModule(this)).build();
+        applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
     }
 
     public ApplicationComponent getApplicationComponent() {

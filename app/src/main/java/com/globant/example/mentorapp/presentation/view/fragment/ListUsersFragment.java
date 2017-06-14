@@ -70,6 +70,7 @@ public class ListUsersFragment extends LifecycleFragment implements ListUsersInt
 
     @Override
     public void usersReady() {
+        listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue(), getContext());
         listUsersRecyclerView.setAdapter(listUsersAdapter);
         listUsersAdapter.notifyDataSetChanged();
     }
