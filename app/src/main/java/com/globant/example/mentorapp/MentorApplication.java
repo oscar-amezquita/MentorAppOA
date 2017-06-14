@@ -2,9 +2,9 @@ package com.globant.example.mentorapp;
 
 import android.app.Application;
 
-import com.globant.example.mentorapp.presentation.di.Component.ApplicationComponent;
-import com.globant.example.mentorapp.presentation.di.Component.DaggerApplicationComponent;
-import com.globant.example.mentorapp.presentation.di.Module.ApplicationModule;
+import com.globant.example.mentorapp.di.Component.ApplicationComponent;
+import com.globant.example.mentorapp.di.Component.DaggerApplicationComponent;
+import com.globant.example.mentorapp.di.Module.ApplicationModule;
 
 /**
  * Custom Application class to manage app resources

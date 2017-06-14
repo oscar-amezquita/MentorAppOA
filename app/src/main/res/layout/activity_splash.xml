@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.view.activity.SplashScreenActivity">
+    tools:context=".home.presentation.view.activity.SplashScreenActivity">
 
     <ImageView
         android:id="@+id/imageSplash"
         android:layout_width="@dimen/splash_icon_width"
         android:layout_height="@dimen/splash_icon_height"
-        android:scaleType="centerInside"
-        app:srcCompat="@drawable/ic_github_logo_smartobject"
+        android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:scaleType="centerInside"
+        app:srcCompat="@drawable/ic_github_logo_smartobject" />
 
     <TextView
         android:id="@+id/txtSplash"
