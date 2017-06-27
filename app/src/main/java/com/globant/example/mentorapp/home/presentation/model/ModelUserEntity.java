@@ -1,6 +1,7 @@
 package com.globant.example.mentorapp.home.presentation.model;
 
 /**
+ * Represents a model of users information to show on the screen.
  * Created by oscar.amezquita on 16/06/2017.
  */
 

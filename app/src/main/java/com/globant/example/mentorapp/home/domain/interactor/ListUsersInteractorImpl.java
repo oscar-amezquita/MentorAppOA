@@ -9,7 +9,7 @@ import javax.inject.Inject;
  * Created by oscar.amezquita on 9/06/2017.
  */
 
-public class ListUsersInteractorImpl implements ListUsersInteractor {
+public class ListUsersInteractorImpl  {
 
 
     private APIClient apiClient;
@@ -19,7 +19,7 @@ public class ListUsersInteractorImpl implements ListUsersInteractor {
         this.apiClient = apiClient;
     }
 
-    @Override
+
     public void getUsersList() {
         apiClient.getUsersListFromAsyncService();
     }

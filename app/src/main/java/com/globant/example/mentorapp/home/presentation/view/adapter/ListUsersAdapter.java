@@ -47,7 +47,7 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
     @Override
     public int getItemCount() {
-        return users != null ? users.size() : R.integer.zero_constant;
+        return users != null ? users.size() : context.getResources().getInteger(R.integer.zero_constant);
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -60,7 +60,6 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
             userNameTextView = (TextView) itemView.findViewById(R.id.textName);
             userImage = (ImageView) itemView.findViewById(R.id.imageUser);
         }
-
 
     }
 }

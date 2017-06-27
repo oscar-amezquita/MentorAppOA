@@ -1,20 +1,13 @@
 package com.globant.example.mentorapp.di.Module;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Context;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.globant.example.mentorapp.MentorApplication;
-import com.globant.example.mentorapp.home.domain.interactor.ListUsersInteractor;
-import com.globant.example.mentorapp.home.domain.interactor.ListUsersInteractorImpl;
-import com.globant.example.mentorapp.home.domain.interactor.data.remote.APIClient;
+import com.globant.example.mentorapp.home.domain.interactor.data.remote.OkHttpConstants;
 import com.globant.example.mentorapp.home.domain.interactor.data.util.ApiUtils;
-import com.globant.example.mentorapp.home.domain.model.EventApiResponseEntity;
 import com.globant.example.mentorapp.home.domain.model.UserEntity;
-import com.globant.example.mentorapp.home.presentation.presenter.ListUsersPresenter;
-import com.globant.example.mentorapp.home.presentation.presenter.ListUsersPresenterImpl;
-import com.globant.example.mentorapp.home.presentation.view.fragment.ListUsersFragment;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
@@ -32,28 +25,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Class to control UserList injections
- * Created by oscar.amezquita on 8/06/2017.
+ * Created by oscar.amezquita on 8/06/2017.l
  */
 @Module
 public class ApplicationModule {
 
-    public Context context;
     public MentorApplication application;
+    public Bus bus;
 
     public ApplicationModule(MentorApplication application) {
-        this.context = application;
+
         this.application = application;
+        bus = new Bus(ThreadEnforcer.ANY);
     }
 
     @Provides
     protected LinearLayoutManager provideLinearLayoutManager() {
-        return new LinearLayoutManager(context);
-    }
-
-    @Provides
-    @Singleton
-    public Context provideContext() {
-        return context;
+        return new LinearLayoutManager(application);
     }
 
     @Provides
@@ -64,33 +52,11 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    public ListUsersInteractor provideUserInteractor() {
-        return new ListUsersInteractorImpl(providesApiClient());
-    }
-
-    @Provides
-    protected ListUsersFragment provideListUsersFragment() {
-        return new ListUsersFragment();
-    }
-
-    @Provides
-    @Singleton
-    ListUsersPresenter provideListUsersPresenter() {
-        return new ListUsersPresenterImpl(application.getApplicationComponent());
-
-    }
-
-    @Provides
-    @Singleton
     public Retrofit provideRetrofitClient(OkHttpClient client) {
-        return new Retrofit.Builder().client(client).baseUrl(ApiUtils.BASE_URL).addConverterFactory(GsonConverterFactory.create())
+        return new Retrofit.Builder().client(client)
+                .baseUrl(ApiUtils.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
                 .build();
-    }
-
-    @Provides
-    @Singleton
-    public APIClient providesApiClient() {
-        return new APIClient(application.getApplicationComponent());
     }
 
     @Provides
@@ -98,18 +64,18 @@ public class ApplicationModule {
     public OkHttpClient provideOkHttpClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-        OkHttpClient.Builder b = new OkHttpClient.Builder();
-        b.readTimeout(2000, TimeUnit.MILLISECONDS);
-        b.writeTimeout(4000, TimeUnit.MILLISECONDS);
-        b.addInterceptor(interceptor);
-        return b.build();
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.readTimeout(OkHttpConstants.READ_TIMEOUT, TimeUnit.MILLISECONDS);
+        builder.writeTimeout(OkHttpConstants.WRITE_TIMEOUT, TimeUnit.MILLISECONDS);
+        builder.addInterceptor(interceptor);
+        return builder.build();
 
     }
 
     @Provides
     @Singleton
     public Bus provideBus() {
-        return new Bus(ThreadEnforcer.ANY);
+        return bus;
     }
 
     @Provides
@@ -121,12 +87,7 @@ public class ApplicationModule {
     @Provides
     @Singleton
     DividerItemDecoration provideItemDecoration() {
-        return new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+        return new DividerItemDecoration(application, DividerItemDecoration.VERTICAL);
     }
 
-    @Provides
-    @Singleton
-    public EventApiResponseEntity provideResponseEntity() {
-        return new EventApiResponseEntity(0, "", null);
-    }
 }

@@ -1,12 +1,8 @@
 package com.globant.example.mentorapp.di.Component;
 
 import com.globant.example.mentorapp.di.Module.ApplicationModule;
-import com.globant.example.mentorapp.home.domain.interactor.ListUsersInteractorImpl;
-import com.globant.example.mentorapp.home.domain.interactor.data.remote.APIClient;
-import com.globant.example.mentorapp.home.presentation.model.SharedUserViewModel;
-import com.globant.example.mentorapp.home.presentation.presenter.ListUsersPresenterImpl;
 import com.globant.example.mentorapp.home.presentation.view.activity.HomeScreenActivity;
-import com.globant.example.mentorapp.home.presentation.view.fragment.ListUsersFragment;
+import com.globant.example.mentorapp.home.presentation.view.fragment.ListUsersViewFragment;
 
 import javax.inject.Singleton;
 
@@ -22,13 +18,6 @@ import dagger.Component;
 public interface ApplicationComponent {
     void inject(HomeScreenActivity activity);
 
-    void inject(ListUsersFragment fragment);
+    void inject(ListUsersViewFragment fragment);
 
-    void inject(ListUsersPresenterImpl listUsersPresenter);
-
-    void inject(ListUsersInteractorImpl listUsersInteractor);
-
-    void inject(APIClient client);
-
-    void inject(SharedUserViewModel sharedUserViewModel);
 }
