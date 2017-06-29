@@ -1,8 +1,9 @@
 package com.globant.example.mentorapp.di.Module;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import javax.inject.Singleton;
 
 import com.globant.example.mentorapp.MentorApplication;
 import com.globant.example.mentorapp.home.domain.interactor.data.remote.APIService;
@@ -12,10 +13,9 @@ import com.globant.example.mentorapp.home.domain.model.UserEntity;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Singleton;
+import android.arch.lifecycle.MutableLiveData;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 
 import dagger.Module;
 import dagger.Provides;
@@ -93,7 +93,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    APIService provideApiService(Retrofit client){
+    APIService provideApiService(Retrofit client) {
         return client.create(APIService.class);
     }
 

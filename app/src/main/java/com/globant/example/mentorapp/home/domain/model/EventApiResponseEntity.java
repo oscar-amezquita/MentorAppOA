@@ -46,7 +46,6 @@ public class EventApiResponseEntity<T> {
             return new EventApiResponseEntity<>(responseCode, responseText, list);
         }
 
-
         /**
          * Sets the {@code responseCode} and returns a reference to this Builder so that the methods can be chained together.
          *

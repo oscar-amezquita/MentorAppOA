@@ -1,10 +1,10 @@
 package com.globant.example.mentorapp.home.presentation.model;
 
+import java.util.List;
+
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
-
-import java.util.List;
 
 /**
  * ViewModel Class to control data between activity, fragments and his states.
@@ -12,7 +12,6 @@ import java.util.List;
  */
 
 public class SharedUserViewModel extends ViewModel {
-
 
     private MutableLiveData<List<ModelUserEntity>> users = new MutableLiveData<>();
 

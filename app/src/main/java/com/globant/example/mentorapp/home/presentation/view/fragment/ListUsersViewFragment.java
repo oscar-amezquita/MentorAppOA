@@ -31,17 +31,17 @@ import android.view.ViewGroup;
  */
 public class ListUsersViewFragment extends LifecycleFragment implements BaseView {
 
-    private SharedUserViewModel model;
+    public static final String LIST_TAG = "listUserFragment";
     @Inject
     public ListUsersPresenterImpl presenter;
     @Inject
     protected LinearLayoutManager linearLayoutManager;
-    private ListUsersAdapter listUsersAdapter;
     @Inject
     DividerItemDecoration itemDecoration;
+    private SharedUserViewModel model;
+    private ListUsersAdapter listUsersAdapter;
     private RecyclerView listUsersRecyclerView;
     private BaseActivity parent;
-    public static final String LIST_TAG = "listUserFragment";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

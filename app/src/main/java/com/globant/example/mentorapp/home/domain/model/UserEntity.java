@@ -157,7 +157,6 @@ public class UserEntity {
         return eventsUrl;
     }
 
-
     public String getReceivedEventsUrl() {
         return receivedEventsUrl;
     }

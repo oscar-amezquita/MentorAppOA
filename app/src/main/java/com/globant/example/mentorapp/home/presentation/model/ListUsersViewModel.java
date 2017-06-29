@@ -25,9 +25,9 @@ public class ListUsersViewModel {
         return error;
     }
 
-    public enum errorResponse{
+    public enum errorResponse {
 
-        ERROR_RESPONSE,ERROR_CONNECTION
+        ERROR_RESPONSE, ERROR_CONNECTION
 
     }
 }

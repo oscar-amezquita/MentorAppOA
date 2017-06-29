@@ -1,10 +1,10 @@
 package com.globant.example.mentorapp;
 
-import android.app.Application;
-
 import com.globant.example.mentorapp.di.Component.ApplicationComponent;
 import com.globant.example.mentorapp.di.Component.DaggerApplicationComponent;
 import com.globant.example.mentorapp.di.Module.ApplicationModule;
+
+import android.app.Application;
 
 /**
  * Custom Application class to manage app resources
@@ -18,7 +18,8 @@ public class MentorApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this)).build();
+        applicationComponent = DaggerApplicationComponent.builder().applicationModule(new ApplicationModule(this))
+                .build();
     }
 
     public ApplicationComponent getApplicationComponent() {

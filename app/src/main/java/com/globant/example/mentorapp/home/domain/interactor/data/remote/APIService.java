@@ -1,8 +1,8 @@
 package com.globant.example.mentorapp.home.domain.interactor.data.remote;
 
-import com.globant.example.mentorapp.home.domain.model.UserEntity;
-
 import java.util.List;
+
+import com.globant.example.mentorapp.home.domain.model.UserEntity;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
