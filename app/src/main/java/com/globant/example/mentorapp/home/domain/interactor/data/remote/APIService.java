@@ -1,6 +1,5 @@
 package com.globant.example.mentorapp.home.domain.interactor.data.remote;
 
-import com.globant.example.mentorapp.home.domain.model.UserDetailEntity;
 import com.globant.example.mentorapp.home.domain.model.UserEntity;
 
 import java.util.List;

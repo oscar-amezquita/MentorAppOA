@@ -1,8 +1,5 @@
 package com.globant.example.mentorapp.mvp.base;
 
-import android.content.Context;
-import android.support.v4.app.Fragment;
-
 import com.squareup.otto.Bus;
 
 /**
@@ -10,9 +7,11 @@ import com.squareup.otto.Bus;
  * Created by oscar.amezquita on 16/06/2017.
  */
 
-public class BasePresenter {
+public abstract class BasePresenter<T extends BaseView> {
 
-    public Bus bus;
+    protected BaseView baseView;
+
+    protected Bus bus;
 
     public void onRegisterBus() {
         bus.register(this);
@@ -22,4 +21,15 @@ public class BasePresenter {
         bus.unregister(this);
     }
 
+    public void attachView(T view) {
+        baseView = view;
+    }
+
+    public void detachView() {
+        baseView = null;
+    }
+
+    protected boolean isViewAttached() {
+        return baseView != null;
+    }
 }

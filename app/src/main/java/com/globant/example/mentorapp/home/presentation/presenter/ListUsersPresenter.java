@@ -1,16 +1,16 @@
 package com.globant.example.mentorapp.home.presentation.presenter;
 
+import java.util.List;
+
 import com.globant.example.mentorapp.home.domain.model.UserEntity;
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
-
-import java.util.List;
 
 /**
  * Interface to define the basic functions to return information to the list of users.
  * Created by oscar.amezquita on 7/06/2017.
  */
 
-public interface ListUsersPresenter<T> {
+public interface ListUsersPresenter {
     /**
      * Provides a list from Users with a provider
      */
@@ -24,9 +24,4 @@ public interface ListUsersPresenter<T> {
      */
     List<ModelUserEntity> translateModel(List<UserEntity> users);
 
-    void attachView(T view);
-
-    void detachView();
-
-    boolean isViewAttached();
 }

@@ -37,9 +37,10 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.userNameTextView.setText(users.get(position).getName());
-        if (!users.get(position).getImageUrl().isEmpty()) {
-            Picasso.with(context).load(users.get(position).getImageUrl()).error(R.drawable.ic_not_found).into(holder.userImage);
+        ModelUserEntity user = users.get(position);
+        holder.userNameTextView.setText(user.getName());
+        if (!user.getImageUrl().isEmpty()) {
+            Picasso.with(context).load(user.getImageUrl()).error(R.drawable.ic_not_found).into(holder.userImage);
         } else {
             holder.userImage.setImageResource(R.drawable.ic_not_found);
         }

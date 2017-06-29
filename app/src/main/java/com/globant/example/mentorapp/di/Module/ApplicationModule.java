@@ -5,6 +5,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.globant.example.mentorapp.MentorApplication;
+import com.globant.example.mentorapp.home.domain.interactor.data.remote.APIService;
 import com.globant.example.mentorapp.home.domain.interactor.data.remote.OkHttpConstants;
 import com.globant.example.mentorapp.home.domain.interactor.data.util.ApiUtils;
 import com.globant.example.mentorapp.home.domain.model.UserEntity;
@@ -88,6 +89,12 @@ public class ApplicationModule {
     @Singleton
     DividerItemDecoration provideItemDecoration() {
         return new DividerItemDecoration(application, DividerItemDecoration.VERTICAL);
+    }
+
+    @Provides
+    @Singleton
+    APIService provideApiService(Retrofit client){
+        return client.create(APIService.class);
     }
 
 }

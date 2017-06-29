@@ -2,8 +2,6 @@ package com.globant.example.mentorapp.home.domain.model;
 
 import com.squareup.otto.Produce;
 
-import java.util.List;
-
 /**
  * Class to manage otto responses from ApiClient
  * Created by oscar.amezquita on 13/06/2017.
@@ -15,9 +13,9 @@ public class EventApiResponseEntity<T> {
     public static final int CONNECTION_ERROR = -1;
     private final int responseCode;
     private final String responseText;
-    private final List<T> list;
+    private final T list;
 
-    public EventApiResponseEntity(int responseCode, String responseText, List<T> list) {
+    private EventApiResponseEntity(int responseCode, String responseText, T list) {
         this.responseCode = responseCode;
         this.responseText = responseText;
         this.list = list;
@@ -31,7 +29,7 @@ public class EventApiResponseEntity<T> {
         return responseText;
     }
 
-    public List<T> getList() {
+    public T getList() {
         return list;
     }
 
@@ -41,11 +39,11 @@ public class EventApiResponseEntity<T> {
     public static final class Builder<T> {
         private int responseCode;
         private String responseText;
-        private List<T> list;
+        private T list;
 
         @Produce
         public EventApiResponseEntity<T> build() {
-            return new EventApiResponseEntity(responseCode, responseText, list);
+            return new EventApiResponseEntity<>(responseCode, responseText, list);
         }
 
 
@@ -77,7 +75,7 @@ public class EventApiResponseEntity<T> {
          * @param listUsers the {@code list} to set
          * @return a reference to this Builder
          */
-        public Builder withUserEntityList(List<T> listUsers) {
+        public Builder withUserEntityList(T listUsers) {
             list = listUsers;
             return this;
         }

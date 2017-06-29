@@ -1,4 +1,4 @@
-package com.globant.example.mentorapp.home.presentation.view.fragment;
+package com.globant.example.mentorapp.mvp.base;
 
 import com.globant.example.mentorapp.home.presentation.model.ListUsersViewModel;
 
@@ -7,13 +7,7 @@ import com.globant.example.mentorapp.home.presentation.model.ListUsersViewModel;
  * Created by oscar.amezquita on 9/06/2017.
  */
 
-public interface ListUsersViewInterface {
-
-
-    /**
-     * Provides SnackBar feature to deploy informative messages
-     */
-    void snackBarMessage(int stringResource);
+public interface BaseView {
 
     /**
      * Method to organize UI actions in view layer

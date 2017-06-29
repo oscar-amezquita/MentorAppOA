@@ -1,32 +1,30 @@
 package com.globant.example.mentorapp.home.presentation.presenter;
 
-import com.globant.example.mentorapp.home.domain.interactor.ListUsersInteractorImpl;
-import com.globant.example.mentorapp.home.domain.model.EventApiResponseEntity;
-import com.globant.example.mentorapp.home.domain.model.UserEntity;
-import com.globant.example.mentorapp.home.presentation.model.ListUsersViewModel;
-import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
-import com.globant.example.mentorapp.home.presentation.view.fragment.ListUsersViewInterface;
-import com.globant.example.mentorapp.mvp.base.BasePresenter;
-import com.squareup.otto.Bus;
-import com.squareup.otto.Subscribe;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+
+import com.globant.example.mentorapp.home.domain.interactor.ListUsersInteractor;
+import com.globant.example.mentorapp.home.domain.model.EventApiResponseEntity;
+import com.globant.example.mentorapp.home.domain.model.UserEntity;
+import com.globant.example.mentorapp.home.presentation.model.ListUsersViewModel;
+import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
+import com.globant.example.mentorapp.mvp.base.BasePresenter;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 
 /**
  * This class controls the exchange of information between the view and the data sources
  * Created by oscar.amezquita on 7/06/2017.
  */
 
-public class ListUsersPresenterImpl extends BasePresenter implements ListUsersPresenter<ListUsersViewInterface> {
+public class ListUsersPresenterImpl extends BasePresenter implements ListUsersPresenter {
 
-    ListUsersInteractorImpl interactor;
-    ListUsersViewInterface listUsersViewInterface;
+    private ListUsersInteractor interactor;
 
     @Inject
-    public ListUsersPresenterImpl(ListUsersInteractorImpl interactor, Bus bus) {
+    public ListUsersPresenterImpl(ListUsersInteractor interactor, Bus bus) {
         this.interactor = interactor;
         this.bus = bus;
     }
@@ -37,21 +35,18 @@ public class ListUsersPresenterImpl extends BasePresenter implements ListUsersPr
     }
 
     @Subscribe
-    public void controlResponse(EventApiResponseEntity result) {
+    public void controlResponse(EventApiResponseEntity<List<UserEntity>> result) {
         if (isViewAttached()) {
             switch (result.getResponseCode()) {
-                case EventApiResponseEntity.HTTP_OK:
-                    listUsersViewInterface.render(new ListUsersViewModel(
-                            translateModel(result.getList()), null));
-                    break;
-                case EventApiResponseEntity.CONNECTION_ERROR:
-                    listUsersViewInterface.render(new ListUsersViewModel(
-                            null, ListUsersViewModel.errorResponse.ERROR_CONNECTION));
-                    break;
-                default:
-                    listUsersViewInterface.render(new ListUsersViewModel(
-                            null, ListUsersViewModel.errorResponse.ERROR_RESPONSE));
-                    break;
+            case EventApiResponseEntity.HTTP_OK:
+                baseView.render(new ListUsersViewModel(translateModel(result.getList()), null));
+                break;
+            case EventApiResponseEntity.CONNECTION_ERROR:
+                baseView.render(new ListUsersViewModel(null, ListUsersViewModel.errorResponse.ERROR_CONNECTION));
+                break;
+            default:
+                baseView.render(new ListUsersViewModel(null, ListUsersViewModel.errorResponse.ERROR_RESPONSE));
+                break;
             }
         }
     }
@@ -64,21 +59,5 @@ public class ListUsersPresenterImpl extends BasePresenter implements ListUsersPr
         }
         return result;
     }
-
-    @Override
-    public void attachView(ListUsersViewInterface view) {
-        listUsersViewInterface = view;
-    }
-
-    @Override
-    public void detachView() {
-        listUsersViewInterface = null;
-    }
-
-    @Override
-    public boolean isViewAttached() {
-        return listUsersViewInterface != null;
-    }
-
 
 }

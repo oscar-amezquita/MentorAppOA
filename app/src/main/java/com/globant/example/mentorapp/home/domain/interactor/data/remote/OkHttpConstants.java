@@ -1,6 +1,7 @@
 package com.globant.example.mentorapp.home.domain.interactor.data.remote;
 
 /**
+ * Interface to define OkHttp constants
  * Created by oscar.amezquita on 23/06/2017.
  */
 
