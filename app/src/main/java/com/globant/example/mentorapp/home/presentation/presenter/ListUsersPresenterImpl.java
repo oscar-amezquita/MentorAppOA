@@ -31,21 +31,25 @@ public class ListUsersPresenterImpl extends BasePresenter implements ListUsersPr
 
     @Override
     public void getUsersList() {
+        baseView.render(new ListUsersViewModel(null, null, true));
         interactor.getUsersList();
     }
 
     @Subscribe
     public void controlResponse(EventApiResponseEntity<List<UserEntity>> result) {
         if (isViewAttached()) {
+            baseView.render(new ListUsersViewModel(null, null, false));
             switch (result.getResponseCode()) {
             case EventApiResponseEntity.HTTP_OK:
-                baseView.render(new ListUsersViewModel(translateModel(result.getList()), null));
+                baseView.render(new ListUsersViewModel(translateModel(result.getList()), null, null));
                 break;
             case EventApiResponseEntity.CONNECTION_ERROR:
-                baseView.render(new ListUsersViewModel(null, ListUsersViewModel.errorResponse.ERROR_CONNECTION));
+                baseView.render(
+                        new ListUsersViewModel(null, ListUsersViewModel.errorResponse.ERROR_CONNECTION, null));
                 break;
             default:
-                baseView.render(new ListUsersViewModel(null, ListUsersViewModel.errorResponse.ERROR_RESPONSE));
+                baseView.render(
+                        new ListUsersViewModel(null, ListUsersViewModel.errorResponse.ERROR_RESPONSE, null));
                 break;
             }
         }

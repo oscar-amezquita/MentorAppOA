@@ -11,10 +11,12 @@ public class ListUsersViewModel {
 
     final List<ModelUserEntity> users;
     final errorResponse error;
+    final Boolean progress;
 
-    public ListUsersViewModel(List<ModelUserEntity> users, errorResponse error) {
+    public ListUsersViewModel(List<ModelUserEntity> users, errorResponse error, Boolean progress) {
         this.users = users;
         this.error = error;
+        this.progress= progress;
     }
 
     public List<ModelUserEntity> getUsers() {
@@ -23,6 +25,10 @@ public class ListUsersViewModel {
 
     public errorResponse getError() {
         return error;
+    }
+
+    public Boolean getProgress() {
+        return progress;
     }
 
     public enum errorResponse {

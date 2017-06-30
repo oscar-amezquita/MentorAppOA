@@ -19,9 +19,8 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,9 +34,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
     @Inject
     public ListUsersPresenterImpl presenter;
     @Inject
-    protected LinearLayoutManager linearLayoutManager;
-    @Inject
-    DividerItemDecoration itemDecoration;
+    protected StaggeredGridLayoutManager staggeredGridLayoutManager;
     private SharedUserViewModel model;
     private ListUsersAdapter listUsersAdapter;
     private RecyclerView listUsersRecyclerView;
@@ -53,12 +50,13 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
         model = ViewModelProviders.of(this).get(SharedUserViewModel.class);
+        parent = (BaseActivity) getActivity();
         if (model.getUsers() != null || model.getUsers().getValue() != null) {
             listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue(), getContext());
+            parent.hideProgress();
         }
         listUsersRecyclerView = (RecyclerView) view.findViewById(R.id.list_item_container);
         defineRecyclerView(listUsersRecyclerView, listUsersAdapter);
-        parent = (BaseActivity) getActivity();
         return view;
     }
 
@@ -67,7 +65,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         if (usersModel.getUsers() != null) {
             model.setUsers(usersModel.getUsers());
             usersReady();
-        } else
+        } else if (usersModel.getError() != null) {
             switch (usersModel.getError()) {
             case ERROR_CONNECTION:
                 usersErrorConnectivity();
@@ -76,6 +74,14 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
                 usersErrorHttp();
                 break;
             }
+        }
+        if (usersModel.getProgress() != null) {
+            if (usersModel.getProgress()) {
+                parent.showProgress();
+            } else {
+                parent.hideProgress();
+            }
+        }
     }
 
     private void usersReady() {
@@ -128,8 +134,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
 
     private void defineRecyclerView(RecyclerView listUsersRecyclerView, RecyclerView.Adapter adapter) {
         listUsersRecyclerView.setHasFixedSize(true);
-        listUsersRecyclerView.setLayoutManager(linearLayoutManager);
-        listUsersRecyclerView.addItemDecoration(itemDecoration);
+        listUsersRecyclerView.setLayoutManager(staggeredGridLayoutManager);
         listUsersRecyclerView.setAdapter(adapter);
     }
 

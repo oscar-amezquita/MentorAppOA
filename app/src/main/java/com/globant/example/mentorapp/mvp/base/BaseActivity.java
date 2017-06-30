@@ -11,4 +11,8 @@ public interface BaseActivity {
      * Provides SnackBar feature to deploy informative messages
      */
     void simpleSnackBarMessage(String message);
+
+    void showProgress();
+
+    void hideProgress();
 }

@@ -14,8 +14,8 @@ import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 
 import dagger.Module;
 import dagger.Provides;
@@ -41,8 +41,8 @@ public class ApplicationModule {
     }
 
     @Provides
-    protected LinearLayoutManager provideLinearLayoutManager() {
-        return new LinearLayoutManager(application);
+    protected StaggeredGridLayoutManager provideLinearLayoutManager() {
+        return new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
     }
 
     @Provides
@@ -54,10 +54,8 @@ public class ApplicationModule {
     @Provides
     @Singleton
     public Retrofit provideRetrofitClient(OkHttpClient client) {
-        return new Retrofit.Builder().client(client)
-                .baseUrl(ApiUtils.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+        return new Retrofit.Builder().client(client).baseUrl(ApiUtils.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create()).build();
     }
 
     @Provides
@@ -83,12 +81,6 @@ public class ApplicationModule {
     @Singleton
     public MutableLiveData<List<UserEntity>> provideLiveData() {
         return new MutableLiveData<>();
-    }
-
-    @Provides
-    @Singleton
-    DividerItemDecoration provideItemDecoration() {
-        return new DividerItemDecoration(application, DividerItemDecoration.VERTICAL);
     }
 
     @Provides
