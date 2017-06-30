@@ -16,7 +16,7 @@ public class ListUsersViewModel {
     public ListUsersViewModel(List<ModelUserEntity> users, errorResponse error, Boolean progress) {
         this.users = users;
         this.error = error;
-        this.progress= progress;
+        this.progress = progress;
     }
 
     public List<ModelUserEntity> getUsers() {

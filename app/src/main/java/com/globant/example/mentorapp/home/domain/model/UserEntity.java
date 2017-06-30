@@ -80,7 +80,10 @@ public class UserEntity {
      * @param organizationsUrl
      * @param starredUrl
      */
-    public UserEntity(String login, Integer id, String avatarUrl, String gravatarId, String url, String htmlUrl, String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl, String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type, Boolean siteAdmin) {
+    public UserEntity(String login, Integer id, String avatarUrl, String gravatarId, String url, String htmlUrl,
+            String followersUrl, String followingUrl, String gistsUrl, String starredUrl, String subscriptionsUrl,
+            String organizationsUrl, String reposUrl, String eventsUrl, String receivedEventsUrl, String type,
+            Boolean siteAdmin) {
         super();
         this.login = login;
         this.id = id;
