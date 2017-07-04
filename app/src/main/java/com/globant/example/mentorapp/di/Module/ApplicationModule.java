@@ -1,9 +1,6 @@
 package com.globant.example.mentorapp.di.Module;
 
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import javax.inject.Singleton;
+import android.arch.lifecycle.MutableLiveData;
 
 import com.globant.example.mentorapp.MentorApplication;
 import com.globant.example.mentorapp.home.domain.interactor.data.remote.APIService;
@@ -13,9 +10,10 @@ import com.globant.example.mentorapp.home.domain.model.UserEntity;
 import com.squareup.otto.Bus;
 import com.squareup.otto.ThreadEnforcer;
 
-import android.arch.lifecycle.MutableLiveData;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -31,18 +29,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class ApplicationModule {
 
-    public MentorApplication application;
-    public Bus bus;
+    private MentorApplication application;
+    private Bus bus;
 
     public ApplicationModule(MentorApplication application) {
 
         this.application = application;
         bus = new Bus(ThreadEnforcer.ANY);
-    }
-
-    @Provides
-    protected StaggeredGridLayoutManager provideLinearLayoutManager() {
-        return new StaggeredGridLayoutManager(2, LinearLayoutManager.VERTICAL);
     }
 
     @Provides
@@ -68,7 +61,6 @@ public class ApplicationModule {
         builder.writeTimeout(OkHttpConstants.WRITE_TIMEOUT, TimeUnit.MILLISECONDS);
         builder.addInterceptor(interceptor);
         return builder.build();
-
     }
 
     @Provides
@@ -85,7 +77,7 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    APIService provideApiService(Retrofit client) {
+    public APIService provideApiService(Retrofit client) {
         return client.create(APIService.class);
     }
 

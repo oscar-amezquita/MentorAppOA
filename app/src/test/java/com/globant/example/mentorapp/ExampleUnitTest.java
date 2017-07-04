@@ -1,15 +1,19 @@
 package com.globant.example.mentorapp;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
+import com.globant.example.mentorapp.home.domain.interactor.FetchUserListInteractor;
+import com.globant.example.mentorapp.home.domain.interactor.data.remote.APIService;
+import com.globant.example.mentorapp.home.domain.model.UserEntity;
+import com.globant.example.mentorapp.home.presentation.presenter.ListUsersPresenterImpl;
+import com.squareup.otto.Bus;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.globant.example.mentorapp.home.domain.interactor.ListUsersInteractor;
-import com.globant.example.mentorapp.home.domain.interactor.data.remote.APIService;
-import com.globant.example.mentorapp.home.presentation.presenter.ListUsersPresenterImpl;
-import com.squareup.otto.Bus;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -26,9 +30,20 @@ public class ExampleUnitTest {
     public void testCreatePresenterInstace() {
         Bus bus = mock(Bus.class);
         APIService service = mock(APIService.class);
-        ListUsersInteractor interactor = new ListUsersInteractor(service, bus);
+        FetchUserListInteractor interactor = new FetchUserListInteractor(service, bus);
         ListUsersPresenterImpl presenter = new ListUsersPresenterImpl(interactor, bus);
-
         Assert.assertNotNull(presenter);
     }
+
+    @Test
+    public void testPresenterTranslation() {
+        Bus bus = mock(Bus.class);
+        APIService service = mock(APIService.class);
+        FetchUserListInteractor interactor = new FetchUserListInteractor(service, bus);
+        ListUsersPresenterImpl presenter = new ListUsersPresenterImpl(interactor, bus);
+        UserEntity userEntity = mock(UserEntity.class);
+        List<UserEntity> userEntityList = Arrays.asList(userEntity, userEntity, userEntity);
+        Assert.assertNotNull(presenter.translateModel(userEntityList));
+    }
+
 }

@@ -1,5 +1,7 @@
 package com.globant.example.mentorapp.home.presentation.model;
 
+import com.globant.example.mentorapp.mvp.base.BaseModel;
+
 import java.util.List;
 
 /**
@@ -7,7 +9,7 @@ import java.util.List;
  * Created by oscar.amezquita on 16/06/2017.
  */
 
-public class ListUsersViewModel {
+public class ListUsersViewModel extends BaseModel {
 
     final List<ModelUserEntity> users;
     final errorResponse error;
@@ -31,9 +33,4 @@ public class ListUsersViewModel {
         return progress;
     }
 
-    public enum errorResponse {
-
-        ERROR_RESPONSE, ERROR_CONNECTION
-
-    }
 }

@@ -2,4 +2,5 @@
 <resources>
     <integer name="splash_screen_duration">3500</integer>
     <integer name="zero_constant">0</integer>
+    <integer name="number_of_users_columns">2</integer>
 </resources>

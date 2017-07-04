@@ -1,11 +1,6 @@
 package com.globant.example.mentorapp.home.presentation.presenter;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.inject.Inject;
-
-import com.globant.example.mentorapp.home.domain.interactor.ListUsersInteractor;
+import com.globant.example.mentorapp.home.domain.interactor.FetchUserListInteractor;
 import com.globant.example.mentorapp.home.domain.model.EventApiResponseEntity;
 import com.globant.example.mentorapp.home.domain.model.UserEntity;
 import com.globant.example.mentorapp.home.presentation.model.ListUsersViewModel;
@@ -14,6 +9,11 @@ import com.globant.example.mentorapp.mvp.base.BasePresenter;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+
 /**
  * This class controls the exchange of information between the view and the data sources
  * Created by oscar.amezquita on 7/06/2017.
@@ -21,18 +21,20 @@ import com.squareup.otto.Subscribe;
 
 public class ListUsersPresenterImpl extends BasePresenter implements ListUsersPresenter {
 
-    private ListUsersInteractor interactor;
+    private FetchUserListInteractor interactor;
 
     @Inject
-    public ListUsersPresenterImpl(ListUsersInteractor interactor, Bus bus) {
+    public ListUsersPresenterImpl(FetchUserListInteractor interactor, Bus bus) {
         this.interactor = interactor;
         this.bus = bus;
     }
 
     @Override
     public void getUsersList() {
-        baseView.render(new ListUsersViewModel(null, null, true));
-        interactor.getUsersList();
+        if (isViewAttached()) {
+            baseView.render(new ListUsersViewModel(null, null, true));
+            interactor.execute();
+        }
     }
 
     @Subscribe
@@ -55,8 +57,13 @@ public class ListUsersPresenterImpl extends BasePresenter implements ListUsersPr
         }
     }
 
-    @Override
-    public List<ModelUserEntity> translateModel(List<UserEntity> users) {
+    /**
+     * Translate Domain UserEntity list to Presentation ModelUserEntity list
+     *
+     * @param users List of {@link UserEntity} domain users
+     * @return List of {@link ModelUserEntity} presentation users
+     */
+    private List<ModelUserEntity> translateModel(List<UserEntity> users) {
         List<ModelUserEntity> result = new ArrayList<>();
         for (UserEntity userEntity : users) {
             result.add(new ModelUserEntity(userEntity.getLogin(), userEntity.getAvatarUrl(), userEntity.getUrl()));

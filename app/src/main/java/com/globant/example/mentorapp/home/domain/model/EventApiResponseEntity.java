@@ -15,10 +15,10 @@ public class EventApiResponseEntity<T> {
     private final String responseText;
     private final T list;
 
-    private EventApiResponseEntity(int responseCode, String responseText, T list) {
-        this.responseCode = responseCode;
-        this.responseText = responseText;
-        this.list = list;
+    private EventApiResponseEntity(Builder builder) {
+        this.responseCode = builder.responseCode;
+        this.responseText = builder.responseText;
+        this.list = (T) builder.list;
     }
 
     public int getResponseCode() {
@@ -42,8 +42,8 @@ public class EventApiResponseEntity<T> {
         private T list;
 
         @Produce
-        public EventApiResponseEntity<T> build() {
-            return new EventApiResponseEntity<>(responseCode, responseText, list);
+        public EventApiResponseEntity build() {
+            return new EventApiResponseEntity(this);
         }
 
         /**
@@ -71,11 +71,11 @@ public class EventApiResponseEntity<T> {
         /**
          * Sets the {@code list} and returns a reference to this Builder so that the methods can be chained together.
          *
-         * @param listUsers the {@code list} to set
+         * @param list the {@code list} to set
          * @return a reference to this Builder
          */
-        public Builder withUserEntityList(T listUsers) {
-            list = listUsers;
+        public Builder withEntityList(T list) {
+            this.list = list;
             return this;
         }
     }

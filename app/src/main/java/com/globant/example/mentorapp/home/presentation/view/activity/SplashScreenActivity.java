@@ -1,13 +1,13 @@
 package com.globant.example.mentorapp.home.presentation.view.activity;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-import com.globant.example.mentorapp.R;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
+import com.globant.example.mentorapp.R;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SplashScreenActivity extends AppCompatActivity {
 
@@ -18,7 +18,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Intent mainIntent = new Intent().setClass(SplashScreenActivity.this, HomeScreenActivity.class);
+                Intent mainIntent = new Intent(SplashScreenActivity.this, HomeScreenActivity.class);
                 startActivity(mainIntent);
                 finish();
             }
