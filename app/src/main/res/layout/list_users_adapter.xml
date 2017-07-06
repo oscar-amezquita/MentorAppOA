@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/imageUser"
-            android:layout_width="@dimen/list_user_image_width"
-            android:layout_height="@dimen/list_user_image_height"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/list_general_margin"

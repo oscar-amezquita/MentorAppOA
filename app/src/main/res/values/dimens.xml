@@ -8,4 +8,5 @@
     <dimen name="user_list_name_size">18sp</dimen>
     <dimen name="card_corner_radius">8dp</dimen>
     <dimen name="card_default_padding">16dp</dimen>
+    <dimen name="default_separator_margin">10dp</dimen>
 </resources>

@@ -1,16 +1,16 @@
 package com.globant.example.mentorapp.home.presentation.view.activity;
 
-import com.globant.example.mentorapp.MentorApplication;
-import com.globant.example.mentorapp.R;
-import com.globant.example.mentorapp.home.presentation.view.fragment.ListUsersViewFragment;
-import com.globant.example.mentorapp.mvp.base.BaseActivity;
-
 import android.arch.lifecycle.LifecycleActivity;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
+
+import com.globant.example.mentorapp.MentorApplication;
+import com.globant.example.mentorapp.R;
+import com.globant.example.mentorapp.home.presentation.view.fragment.ListUsersViewFragment;
+import com.globant.example.mentorapp.mvp.base.BaseActivity;
 
 public class HomeScreenActivity extends LifecycleActivity implements BaseActivity {
 
@@ -26,7 +26,7 @@ public class HomeScreenActivity extends LifecycleActivity implements BaseActivit
         ((MentorApplication) getApplicationContext()).getApplicationComponent().inject(this);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, new ListUsersViewFragment(), ListUsersViewFragment.LIST_TAG)
+                    .replace(R.id.fragment_container, ListUsersViewFragment.getInstance(), ListUsersViewFragment.LIST_TAG)
                     .commit();
         }
     }

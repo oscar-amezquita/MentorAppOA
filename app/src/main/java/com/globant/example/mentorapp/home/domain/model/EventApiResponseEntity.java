@@ -13,12 +13,12 @@ public class EventApiResponseEntity<T> {
     public static final int CONNECTION_ERROR = -1;
     private final int responseCode;
     private final String responseText;
-    private final T list;
+    private final T data;
 
     private EventApiResponseEntity(Builder builder) {
         this.responseCode = builder.responseCode;
         this.responseText = builder.responseText;
-        this.list = (T) builder.list;
+        this.data = (T) builder.data;
     }
 
     public int getResponseCode() {
@@ -29,8 +29,8 @@ public class EventApiResponseEntity<T> {
         return responseText;
     }
 
-    public T getList() {
-        return list;
+    public T getData() {
+        return data;
     }
 
     /**
@@ -39,7 +39,7 @@ public class EventApiResponseEntity<T> {
     public static final class Builder<T> {
         private int responseCode;
         private String responseText;
-        private T list;
+        private T data;
 
         @Produce
         public EventApiResponseEntity build() {
@@ -69,13 +69,13 @@ public class EventApiResponseEntity<T> {
         }
 
         /**
-         * Sets the {@code list} and returns a reference to this Builder so that the methods can be chained together.
+         * Sets the {@code data} and returns a reference to this Builder so that the methods can be chained together.
          *
-         * @param list the {@code list} to set
+         * @param list the {@code data} to set
          * @return a reference to this Builder
          */
         public Builder withEntityList(T list) {
-            this.list = list;
+            this.data = list;
             return this;
         }
     }

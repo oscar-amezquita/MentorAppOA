@@ -7,29 +7,33 @@ import com.squareup.otto.Bus;
  * Created by oscar.amezquita on 16/06/2017.
  */
 
-public abstract class BasePresenter<T extends BaseView> {
+public class BasePresenter<T extends BaseView> {
 
-    protected BaseView baseView;
+    protected BaseView view;
 
     protected Bus bus;
 
-    public void onRegisterBus() {
+    public BasePresenter(Bus bus) {
+        this.bus = bus;
+    }
+
+    public void registerBus() {
         bus.register(this);
     }
 
-    public void onUnregisterBus() {
+    public void unregisterBus() {
         bus.unregister(this);
     }
 
     public void attachView(T view) {
-        baseView = view;
+        this.view = view;
     }
 
     public void detachView() {
-        baseView = null;
+        view = null;
     }
 
     protected boolean isViewAttached() {
-        return baseView != null;
+        return view != null;
     }
 }

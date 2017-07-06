@@ -54,13 +54,6 @@ public class UserEntity {
     private Boolean siteAdmin;
 
     /**
-     * Entity to save Users general information
-     *
-     */
-    public UserEntity() {
-    }
-
-    /**
      *
      * @param eventsUrl
      * @param siteAdmin
