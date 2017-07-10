@@ -80,15 +80,13 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
                 case ERROR_RESPONSE:
                     usersErrorHttp();
                     break;
-
             }
         }
-        if (usersModel.getProgress() != null) {
-            if (usersModel.getProgress()) {
-                parent.showProgress();
-            } else {
-                parent.hideProgress();
-            }
+
+        if (usersModel.getProgress()) {
+            parent.showProgress();
+        } else {
+            parent.hideProgress();
         }
     }
 
@@ -141,6 +139,5 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         listUsersRecyclerView.setLayoutManager(staggeredGridLayoutManager);
         listUsersRecyclerView.setAdapter(adapter);
     }
-
 
 }

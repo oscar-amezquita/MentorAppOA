@@ -7,12 +7,14 @@ import com.globant.example.mentorapp.home.presentation.model.ListUsersViewModel;
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
 import com.globant.example.mentorapp.mvp.base.BaseModel;
 import com.globant.example.mentorapp.mvp.base.BasePresenter;
+import com.google.common.base.Function;
+import com.google.common.collect.FluentIterable;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 /**
@@ -30,6 +32,19 @@ public class ListUsersPresenterImpl extends BasePresenter implements ListUsersPr
         this.interactor = interactor;
     }
 
+    /**
+     * Translate Domain UserEntity list to Presentation ModelUserEntity list
+     */
+    private static Function<UserEntity, ModelUserEntity> transformToModelUser() {
+        return new Function<UserEntity, ModelUserEntity>() {
+            @Nullable
+            @Override
+            public ModelUserEntity apply(@Nullable UserEntity input) {
+                return new ModelUserEntity(input.getLogin(), input.getAvatarUrl(), input.getUrl());
+            }
+        };
+    }
+
     @Override
     public void getUsersList() {
         if (isViewAttached()) {
@@ -41,35 +56,20 @@ public class ListUsersPresenterImpl extends BasePresenter implements ListUsersPr
     @Subscribe
     public void controlResponse(EventApiResponseEntity<List<UserEntity>> result) {
         if (isViewAttached()) {
-            view.render(new ListUsersViewModel(null, null, false));
             switch (result.getResponseCode()) {
                 case EventApiResponseEntity.HTTP_OK:
-                    view.render(new ListUsersViewModel(translateModel(result.getData()), null, null));
+                    view.render(new ListUsersViewModel(FluentIterable.from(result.getData()).transform(transformToModelUser()).toList(), null, false));
                     break;
                 case EventApiResponseEntity.CONNECTION_ERROR:
                     view.render(
-                            new ListUsersViewModel(null, BaseModel.ErrorResponse.ERROR_CONNECTION, null));
+                            new ListUsersViewModel(null, BaseModel.ErrorResponse.ERROR_CONNECTION, false));
                     break;
                 default:
                     view.render(
-                            new ListUsersViewModel(null, BaseModel.ErrorResponse.ERROR_RESPONSE, null));
+                            new ListUsersViewModel(null, BaseModel.ErrorResponse.ERROR_RESPONSE, false));
                     break;
             }
         }
-    }
-
-    /**
-     * Translate Domain UserEntity list to Presentation ModelUserEntity list
-     *
-     * @param users List of {@link UserEntity} domain users
-     * @return List of {@link ModelUserEntity} presentation users
-     */
-    protected List<ModelUserEntity> translateModel(List<UserEntity> users) {
-        List<ModelUserEntity> result = new ArrayList<>();
-        for (UserEntity userEntity : users) {
-            result.add(new ModelUserEntity(userEntity.getLogin(), userEntity.getAvatarUrl(), userEntity.getUrl()));
-        }
-        return result;
     }
 
 }

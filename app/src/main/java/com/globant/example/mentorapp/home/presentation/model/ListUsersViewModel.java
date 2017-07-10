@@ -11,11 +11,11 @@ import java.util.List;
 
 public class ListUsersViewModel extends BaseModel {
 
-    final List<ModelUserEntity> users;
-    final ErrorResponse error;
-    final Boolean progress;
+    private final List<ModelUserEntity> users;
+    private final ErrorResponse error;
+    private final boolean progress;
 
-    public ListUsersViewModel(List<ModelUserEntity> users, ErrorResponse error, Boolean progress) {
+    public ListUsersViewModel(List<ModelUserEntity> users, ErrorResponse error, boolean progress) {
         this.users = users;
         this.error = error;
         this.progress = progress;
@@ -29,7 +29,7 @@ public class ListUsersViewModel extends BaseModel {
         return error;
     }
 
-    public Boolean getProgress() {
+    public boolean getProgress() {
         return progress;
     }
 

@@ -43,8 +43,6 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
                 .error(R.drawable.ic_not_found)
                 .placeholder(R.drawable.ic_placeholder)
                 .into(holder.userImage);
-
-
     }
 
     @Override

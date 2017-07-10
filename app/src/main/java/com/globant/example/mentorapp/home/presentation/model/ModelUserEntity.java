@@ -7,9 +7,9 @@ package com.globant.example.mentorapp.home.presentation.model;
 
 public class ModelUserEntity {
 
-    private String name;
-    private String imageUrl;
-    private String profileUrl;
+    private final String name;
+    private final String imageUrl;
+    private final String profileUrl;
 
     public ModelUserEntity(String name, String imageUrl, String profileUrl) {
         this.name = name;
