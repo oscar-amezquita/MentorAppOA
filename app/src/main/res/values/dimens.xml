@@ -2,4 +2,11 @@
 <resources>
     <dimen name="splash_icon_width">220dp</dimen>
     <dimen name="splash_icon_height">120dp</dimen>
+    <dimen name="list_general_margin">10dp</dimen>
+    <dimen name="list_user_image_width">140dp</dimen>
+    <dimen name="list_user_image_height">140dp</dimen>
+    <dimen name="user_list_name_size">18sp</dimen>
+    <dimen name="card_corner_radius">8dp</dimen>
+    <dimen name="card_default_padding">16dp</dimen>
+    <dimen name="default_separator_margin">10dp</dimen>
 </resources>
