@@ -36,7 +36,6 @@ public class ListUsersPresenterImplTest {
     @InjectMocks
     ListUsersPresenterImpl presenter;
 
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);

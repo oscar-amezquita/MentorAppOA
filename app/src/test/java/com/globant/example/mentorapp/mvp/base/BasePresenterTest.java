@@ -25,7 +25,6 @@ public class BasePresenterTest {
     @Mock
     private Bus bus;
 
-
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
