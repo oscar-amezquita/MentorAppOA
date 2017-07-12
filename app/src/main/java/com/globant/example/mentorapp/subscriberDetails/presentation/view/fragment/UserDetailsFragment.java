@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import com.globant.example.mentorapp.R;
 
 /**
- * A simple {@link Fragment} subclass.
+ * A placeholder fragment some details of the selected user.
  */
 public class UserDetailsFragment extends Fragment {
 
