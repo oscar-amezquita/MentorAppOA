@@ -5,4 +5,12 @@
     <string name="action_settings">Settings</string>
     <string name="communication_error_message">Communication error, try again.</string>
     <string name="http_error_message">Server Error, Please try again.</string>
+
+    <!-- Subscriber detail -->
+    <string name="tv_detail_user_name">User Name: </string>
+    <string name="tv_detail_location">Location: </string>
+    <string name="tv_detail_company">Company: </string>
+    <string name="tv_detail_followers">Followers: </string>
+    <string name="tv_detail_following">Following: </string>
+    <string name="tv_detail_repositories">Repositories: </string>
 </resources>

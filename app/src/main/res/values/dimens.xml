@@ -9,4 +9,5 @@
     <dimen name="card_corner_radius">8dp</dimen>
     <dimen name="card_default_padding">16dp</dimen>
     <dimen name="default_separator_margin">10dp</dimen>
+    <dimen name="detail_user_image_size">60dp</dimen>
 </resources>
