@@ -2,7 +2,6 @@
     <string name="app_name">MentorApp</string>
     <string name="splash_text">Subscriber App</string>
     <string name="title_activity_home_screen">"GitHub Subscribers"</string>
-    <string name="action_settings">Settings</string>
     <string name="communication_error_message">Communication error, try again.</string>
     <string name="http_error_message">Server Error, Please try again.</string>
 
