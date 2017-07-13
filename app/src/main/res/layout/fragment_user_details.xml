@@ -7,7 +7,7 @@
     android:padding="@dimen/default_separator_margin"
     tools:context="com.globant.example.mentorapp.subscriberDetails.presentation.view.fragment.UserDetailsFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -16,47 +16,51 @@
             android:id="@+id/imageView"
             android:layout_width="@dimen/detail_user_image_size"
             android:layout_height="@dimen/detail_user_image_size"
-            android:layout_weight="1"
             app:srcCompat="@drawable/ic_placeholder"
             tools:ignore="ContentDescription" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/txtUserName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:orientation="vertical">
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/list_general_margin"
+            android:layout_toEndOf="@+id/imageView"
+            tools:text="@string/tv_detail_user_name" />
 
-            <TextView
-                android:id="@+id/txtUserName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="@string/tv_detail_user_name" />
+        <TextView
+            android:id="@+id/txtLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtUserName"
+            android:layout_marginLeft="@dimen/list_general_margin"
+            android:layout_toEndOf="@+id/imageView"
+            tools:text="@string/tv_detail_location" />
 
-            <TextView
-                android:id="@+id/txtLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:text="@string/tv_detail_location" />
+        <TextView
+            android:id="@+id/txtCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtLocation"
+            android:layout_marginLeft="@dimen/list_general_margin"
+            android:layout_toEndOf="@+id/imageView"
+            android:text="@string/tv_detail_company"
+            tools:text="@string/tv_detail_company" />
 
-            <TextView
-                android:id="@+id/txtCompany"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/tv_detail_company"
-                tools:ignore="HardcodedText"
-                tools:text="@string/tv_detail_company" />
-        </LinearLayout>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <View
+        style="@style/divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginBottom="@dimen/list_general_margin"
         android:layout_marginTop="@dimen/default_separator_margin" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/list_general_margin"
         android:layout_marginTop="@dimen/list_general_margin"
         android:orientation="horizontal">
 
@@ -76,35 +80,31 @@
     </LinearLayout>
 
     <View
+        style="@style/divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginBottom="@dimen/list_general_margin"
         android:layout_marginTop="@dimen/default_separator_margin" />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/txtRepositories"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/list_general_margin"
-        android:orientation="horizontal">
+        android:layout_marginBottom="@dimen/list_general_margin"
+        tools:text="@string/tv_detail_repositories" />
 
-
-        <TextView
-            android:id="@+id/txtRepositories"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:gravity="center_vertical"
-            tools:text="@string/tv_detail_repositories" />
-    </RelativeLayout>
 
     <View
+        style="@style/divider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="@dimen/divider_height"
+        android:layout_marginBottom="@dimen/list_general_margin"
         android:layout_marginTop="@dimen/default_separator_margin" />
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/list_repository_adapter" />
+        android:layout_marginBottom="@dimen/list_general_margin"
+        tools:listitem="@layout/layout_repository_item" />
 
 </LinearLayout>
