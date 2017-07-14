@@ -1,4 +1,4 @@
-package com.globant.example.mentorapp.subscriberDetails.domain.model;
+package com.globant.example.mentorapp.subscriberDetails.presentation.model;
 
 /**
  * Represents a model of repository basic information.

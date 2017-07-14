@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.globant.example.mentorapp.R;
-import com.globant.example.mentorapp.subscriberDetails.domain.model.RepositoryModel;
+import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryModel;
 
 import java.util.List;
 
