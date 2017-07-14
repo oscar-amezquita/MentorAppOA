@@ -6,10 +6,10 @@
     <string name="http_error_message">Server Error, Please try again.</string>
 
     <!-- Subscriber detail -->
-    <string name="tv_detail_user_name">User Name: </string>
-    <string name="tv_detail_location">Location: </string>
-    <string name="tv_detail_company">Company: </string>
-    <string name="tv_detail_followers">Followers: </string>
-    <string name="tv_detail_following">Following: </string>
-    <string name="tv_detail_repositories">Repositories: </string>
+    <string name="tv_detail_user_name">User Name: %s</string>
+    <string name="tv_detail_location">Location: %s</string>
+    <string name="tv_detail_company">Company: %s</string>
+    <string name="tv_detail_followers">Followers: %s</string>
+    <string name="tv_detail_following">Following: %s</string>
+    <string name="tv_detail_repositories">Repositories: %s</string>
 </resources>
