@@ -1,0 +1,102 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/default_separator_margin"
+    tools:context="com.globant.example.mentorapp.subscriberDetails.presentation.view.fragment.UserDetailsFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/detail_user_image_size"
+            android:layout_height="@dimen/detail_user_image_size"
+            app:srcCompat="@drawable/ic_placeholder"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/txtUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="@dimen/list_general_margin"
+            android:layout_toEndOf="@+id/imageView"
+            tools:text="@string/tv_detail_user_name" />
+
+        <TextView
+            android:id="@+id/txtLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtUserName"
+            android:layout_marginStart="@dimen/list_general_margin"
+            android:layout_toEndOf="@+id/imageView"
+            tools:text="@string/tv_detail_location" />
+
+        <TextView
+            android:id="@+id/txtCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtLocation"
+            android:layout_marginStart="@dimen/list_general_margin"
+            android:layout_toEndOf="@+id/imageView"
+            android:text="@string/tv_detail_company"
+            tools:text="@string/tv_detail_company" />
+
+    </RelativeLayout>
+
+    <View
+        style="@style/divider"
+        android:layout_marginBottom="@dimen/list_general_margin"
+        android:layout_marginTop="@dimen/default_separator_margin" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/list_general_margin"
+        android:layout_marginTop="@dimen/list_general_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/txtFollowers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="@string/tv_detail_followers" />
+
+        <TextView
+            android:id="@+id/txtFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:text="@string/tv_detail_following" />
+    </LinearLayout>
+
+    <View
+        style="@style/divider"
+        android:layout_marginBottom="@dimen/list_general_margin"
+        android:layout_marginTop="@dimen/default_separator_margin" />
+
+    <TextView
+        android:id="@+id/txtRepositories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/list_general_margin"
+        tools:text="@string/tv_detail_repositories" />
+
+    <View
+        style="@style/divider"
+        android:layout_marginBottom="@dimen/list_general_margin"
+        android:layout_marginTop="@dimen/default_separator_margin" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/list_general_margin"
+        tools:listitem="@layout/layout_repository_item" />
+
+</LinearLayout>
