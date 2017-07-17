@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.globant.example.mentorapp.R;
-import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryModel;
+import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryViewModel;
 
 import java.util.List;
 
@@ -19,10 +19,10 @@ import java.util.List;
 
 public class UserRepositoriesAdapter extends RecyclerView.Adapter<UserRepositoriesAdapter.ViewHolder> {
 
-    private List<RepositoryModel> userRepositoriesAdapterList;
+    private List<RepositoryViewModel> userRepositoriesAdapterList;
     private Context context;
 
-    public UserRepositoriesAdapter(List<RepositoryModel> userRepositoriesAdapterList, Context context) {
+    public UserRepositoriesAdapter(List<RepositoryViewModel> userRepositoriesAdapterList, Context context) {
         this.userRepositoriesAdapterList = userRepositoriesAdapterList;
         this.context = context;
     }
@@ -35,7 +35,7 @@ public class UserRepositoriesAdapter extends RecyclerView.Adapter<UserRepositori
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        RepositoryModel model = userRepositoriesAdapterList.get(position);
+        RepositoryViewModel model = userRepositoriesAdapterList.get(position);
         holder.repoNameTextView.setText(model.getRepoName());
         holder.repoURLTextView.setText(model.getRepoURL());
     }
@@ -45,7 +45,7 @@ public class UserRepositoriesAdapter extends RecyclerView.Adapter<UserRepositori
         return userRepositoriesAdapterList != null ? userRepositoriesAdapterList.size() : context.getResources().getInteger(R.integer.zero_constant);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView repoNameTextView;
         private TextView repoURLTextView;
