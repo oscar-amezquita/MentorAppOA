@@ -1,7 +1,7 @@
 package com.globant.example.mentorapp.data.remote;
 
-import com.globant.example.mentorapp.home.domain.model.UserDetailEntity;
 import com.globant.example.mentorapp.home.domain.model.UserEntity;
+import com.globant.example.mentorapp.subscriberDetails.domain.model.UserDetailEntity;
 
 import java.util.List;
 
@@ -21,5 +21,4 @@ public interface APIService {
 
     @GET("/users/{userName}")
     Call<List<UserDetailEntity>> getUserDetails(@Path("userName") String userName);
-
 }
