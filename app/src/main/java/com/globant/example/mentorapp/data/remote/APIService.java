@@ -1,8 +1,9 @@
-package com.globant.example.mentorapp.home.domain.interactor.data.remote;
-
-import java.util.List;
+package com.globant.example.mentorapp.data.remote;
 
 import com.globant.example.mentorapp.home.domain.model.UserEntity;
+import com.globant.example.mentorapp.subscriberDetails.domain.model.UserDetailEntity;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -17,4 +18,7 @@ public interface APIService {
 
     @GET("/repos/{profileGitHub}/{repoName}/subscribers")
     Call<List<UserEntity>> getUsers(@Path("profileGitHub") String userGit, @Path("repoName") String repoName);
+
+    @GET("/users/{userName}")
+    Call<List<UserDetailEntity>> getUserDetails(@Path("userName") String userName);
 }

@@ -1,4 +1,4 @@
-package com.globant.example.mentorapp.home.domain.interactor.data.util;
+package com.globant.example.mentorapp.data.util;
 
 /**
  * Class to define some communications tools.

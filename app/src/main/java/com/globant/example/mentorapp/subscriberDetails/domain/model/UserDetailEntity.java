@@ -1,9 +1,9 @@
-package com.globant.example.mentorapp.home.domain.model;
+package com.globant.example.mentorapp.subscriberDetails.domain.model;
 
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Class to manage endpoint responses using okhttp
+ * Class to manage endpoint responses using okhttp from user detail
  * Created by oscar.amezquita on 10/06/2017.
  */
 public class UserDetailEntity {
