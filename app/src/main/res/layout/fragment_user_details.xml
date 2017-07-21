@@ -84,6 +84,7 @@
         android:id="@+id/txtRepositories"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/list_general_margin"
         tools:text="@string/tv_detail_repositories" />
 
     <View
@@ -92,7 +93,6 @@
         android:layout_marginTop="@dimen/default_separator_margin" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/list_repo_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/list_general_margin"
