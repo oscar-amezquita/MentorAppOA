@@ -14,9 +14,9 @@ import android.view.ViewGroup;
 
 import com.globant.example.mentorapp.MentorApplication;
 import com.globant.example.mentorapp.R;
+import com.globant.example.mentorapp.data.livedata.SharedViewModel;
 import com.globant.example.mentorapp.home.presentation.model.ListUsersViewModel;
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
-import com.globant.example.mentorapp.home.presentation.model.SharedUserViewModel;
 import com.globant.example.mentorapp.home.presentation.presenter.ListUsersPresenterImpl;
 import com.globant.example.mentorapp.home.presentation.view.adapter.ListUsersAdapter;
 import com.globant.example.mentorapp.mvp.base.BaseActivity;
@@ -35,14 +35,13 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
     @Inject
     public ListUsersPresenterImpl presenter;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
-    private SharedUserViewModel model;
+    private SharedViewModel model;
     private ListUsersAdapter listUsersAdapter;
     private RecyclerView listUsersRecyclerView;
     private BaseActivity parent;
 
     public static ListUsersViewFragment getInstance() {
-        ListUsersViewFragment listUsersViewFragment = new ListUsersViewFragment();
-        return listUsersViewFragment;
+        return new ListUsersViewFragment();
     }
 
     @Override
@@ -54,7 +53,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
-        model = ViewModelProviders.of(this).get(SharedUserViewModel.class);
+        model = ViewModelProviders.of(this).get(SharedViewModel.class);
         parent = (BaseActivity) getActivity();
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(
                 getResources().getInteger(R.integer.number_of_users_columns), LinearLayoutManager.VERTICAL);
