@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.globant.example.mentorapp.R;
-import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryViewModel;
+import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryModel;
 
 import java.util.List;
 
@@ -19,10 +19,10 @@ import java.util.List;
 
 public class UserRepositoriesAdapter extends RecyclerView.Adapter<UserRepositoriesAdapter.ViewHolder> {
 
-    private List<RepositoryViewModel> userRepositoriesAdapterList;
+    private List<RepositoryModel> userRepositoriesAdapterList;
     private Context context;
 
-    public UserRepositoriesAdapter(List<RepositoryViewModel> userRepositoriesAdapterList, Context context) {
+    public UserRepositoriesAdapter(List<RepositoryModel> userRepositoriesAdapterList, Context context) {
         this.userRepositoriesAdapterList = userRepositoriesAdapterList;
         this.context = context;
     }
@@ -35,7 +35,7 @@ public class UserRepositoriesAdapter extends RecyclerView.Adapter<UserRepositori
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        RepositoryViewModel model = userRepositoriesAdapterList.get(position);
+        RepositoryModel model = userRepositoriesAdapterList.get(position);
         holder.repoNameTextView.setText(model.getRepoName());
         holder.repoURLTextView.setText(model.getRepoURL());
     }
@@ -50,10 +50,10 @@ public class UserRepositoriesAdapter extends RecyclerView.Adapter<UserRepositori
         private TextView repoNameTextView;
         private TextView repoURLTextView;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            repoNameTextView = (TextView) itemView.findViewById(R.id.textName);
-            repoURLTextView = (TextView) itemView.findViewById(R.id.textName);
+            repoNameTextView = (TextView) itemView.findViewById(R.id.repoName);
+            repoURLTextView = (TextView) itemView.findViewById(R.id.repoURL);
         }
     }
 }

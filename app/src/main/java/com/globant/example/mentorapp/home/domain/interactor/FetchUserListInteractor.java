@@ -3,8 +3,8 @@ package com.globant.example.mentorapp.home.domain.interactor;
 import android.support.annotation.NonNull;
 
 import com.globant.example.mentorapp.data.remote.APIService;
+import com.globant.example.mentorapp.data.remote.EventApiResponseEntity;
 import com.globant.example.mentorapp.data.util.ApiUtils;
-import com.globant.example.mentorapp.home.domain.model.EventApiResponseEntity;
 import com.globant.example.mentorapp.home.domain.model.UserEntity;
 import com.squareup.otto.Bus;
 

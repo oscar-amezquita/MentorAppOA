@@ -1,7 +1,7 @@
 package com.globant.example.mentorapp.com.globant.example.mentorapp.home.presentation.presenter;
 
+import com.globant.example.mentorapp.data.remote.EventApiResponseEntity;
 import com.globant.example.mentorapp.home.domain.interactor.FetchUserListInteractor;
-import com.globant.example.mentorapp.home.domain.model.EventApiResponseEntity;
 import com.globant.example.mentorapp.home.domain.model.UserEntity;
 import com.globant.example.mentorapp.home.presentation.model.ListUsersViewModel;
 import com.globant.example.mentorapp.home.presentation.presenter.ListUsersPresenterImpl;

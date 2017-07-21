@@ -1,10 +1,11 @@
 package com.globant.example.mentorapp.di.Component;
 
-import javax.inject.Singleton;
-
 import com.globant.example.mentorapp.di.Module.ApplicationModule;
 import com.globant.example.mentorapp.home.presentation.view.activity.HomeScreenActivity;
 import com.globant.example.mentorapp.home.presentation.view.fragment.ListUsersViewFragment;
+import com.globant.example.mentorapp.subscriberDetails.presentation.view.fragment.UserDetailsFragment;
+
+import javax.inject.Singleton;
 
 import dagger.Component;
 
@@ -14,10 +15,12 @@ import dagger.Component;
  */
 
 @Singleton
-@Component(modules = {ApplicationModule.class })
+@Component(modules = {ApplicationModule.class})
 public interface ApplicationComponent {
     void inject(HomeScreenActivity activity);
 
     void inject(ListUsersViewFragment fragment);
+
+    void inject(UserDetailsFragment fragment);
 
 }

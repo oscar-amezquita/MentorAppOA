@@ -1,6 +1,7 @@
 package com.globant.example.mentorapp.home.presentation.view.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,8 @@ import android.widget.TextView;
 
 import com.globant.example.mentorapp.R;
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
+import com.globant.example.mentorapp.home.presentation.view.activity.HomeScreenActivity;
+import com.globant.example.mentorapp.subscriberDetails.presentation.view.fragment.UserDetailsFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -32,7 +35,7 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_users_adapter, null);
-        return new ViewHolder(view);
+        return new ViewHolder(view, context);
     }
 
     @Override
@@ -50,16 +53,28 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
         return users != null ? users.size() : context.getResources().getInteger(R.integer.zero_constant);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView userNameTextView;
         private ImageView userImage;
 
-        public ViewHolder(View itemView) {
+        public ViewHolder(View itemView, final Context context) {
             super(itemView);
             userNameTextView = (TextView) itemView.findViewById(R.id.textName);
             userImage = (ImageView) itemView.findViewById(R.id.imageUser);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    UserDetailsFragment detailsFragment = UserDetailsFragment.getInstance();
+                    Bundle bundle = new Bundle();
+                    bundle.putString("userId", userNameTextView.getText().toString());
+                    detailsFragment.setArguments(bundle);
+                    ((HomeScreenActivity) context).getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.fragment_container, detailsFragment)
+                            .addToBackStack(null)
+                            .commit();
+                }
+            });
         }
-
     }
 }
