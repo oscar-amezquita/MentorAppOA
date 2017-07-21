@@ -5,7 +5,7 @@ package com.globant.example.mentorapp.subscriberDetails.presentation.model;
  * Created by oscar.amezquita on 17/07/2017.
  */
 
-public class DetailsModel {
+public class UserDetailsModel {
 
     private String imageUrl;
     private String userName;
@@ -14,7 +14,7 @@ public class DetailsModel {
     private int followers;
     private int following;
 
-    private DetailsModel(Builder builder) {
+    private UserDetailsModel(Builder builder) {
         userName = builder.userName;
         location = builder.location;
         company = builder.company;
@@ -48,7 +48,7 @@ public class DetailsModel {
     }
 
     /**
-     * {@code DetailsModel} builder static inner class.
+     * {@code UserDetailsModel} builder static inner class.
      */
     public static final class Builder {
         private String imageUrl;
@@ -128,12 +128,12 @@ public class DetailsModel {
         }
 
         /**
-         * Returns a {@code DetailsModel} built from the parameters previously set.
+         * Returns a {@code UserDetailsModel} built from the parameters previously set.
          *
-         * @return a {@code DetailsModel} built with parameters of this {@code DetailsModel.Builder}
+         * @return a {@code UserDetailsModel} built with parameters of this {@code UserDetailsModel.Builder}
          */
-        public DetailsModel build() {
-            return new DetailsModel(this);
+        public UserDetailsModel build() {
+            return new UserDetailsModel(this);
         }
     }
 

@@ -5,8 +5,8 @@ import android.arch.lifecycle.MutableLiveData;
 import android.arch.lifecycle.ViewModel;
 
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
-import com.globant.example.mentorapp.subscriberDetails.presentation.model.DetailsModel;
 import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryModel;
+import com.globant.example.mentorapp.subscriberDetails.presentation.model.UserDetailsModel;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class SharedViewModel extends ViewModel {
 
     private MutableLiveData<List<ModelUserEntity>> users = new MutableLiveData<>();
 
-    private MutableLiveData<DetailsModel> userDetails = new MutableLiveData<>();
+    private MutableLiveData<UserDetailsModel> userDetails = new MutableLiveData<>();
 
     private MutableLiveData<List<RepositoryModel>> userRepos = new MutableLiveData<>();
 
@@ -32,11 +32,11 @@ public class SharedViewModel extends ViewModel {
         users.setValue(userEntityList);
     }
 
-    public LiveData<DetailsModel> getUserDetails() {
+    public LiveData<UserDetailsModel> getUserDetails() {
         return userDetails;
     }
 
-    public void setUsersDetails(DetailsModel userDetailsEntityList) {
+    public void setUsersDetails(UserDetailsModel userDetailsEntityList) {
 
         userDetails.setValue(userDetailsEntityList);
     }

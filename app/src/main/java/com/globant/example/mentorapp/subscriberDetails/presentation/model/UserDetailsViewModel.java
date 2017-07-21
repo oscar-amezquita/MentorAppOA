@@ -11,19 +11,19 @@ import java.util.List;
 
 public class UserDetailsViewModel extends BaseModel {
 
-    private final DetailsModel userDetails;
+    private final UserDetailsModel userDetails;
     private final List<RepositoryModel> userRepos;
     private final ErrorResponse error;
     private final boolean progress;
 
-    public UserDetailsViewModel(DetailsModel user, List<RepositoryModel> modelListRepos, ErrorResponse error, boolean progress) {
+    public UserDetailsViewModel(UserDetailsModel user, List<RepositoryModel> modelListRepos, ErrorResponse error, boolean progress) {
         this.userDetails = user;
         this.userRepos = modelListRepos;
         this.error = error;
         this.progress = progress;
     }
 
-    public DetailsModel getUserDetails() {
+    public UserDetailsModel getUserDetails() {
         return userDetails;
     }
 

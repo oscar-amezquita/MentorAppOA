@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.globant.example.mentorapp.data.remote.APIService;
 import com.globant.example.mentorapp.data.remote.EventApiResponseEntity;
+import com.globant.example.mentorapp.data.util.ApiUtils;
 import com.globant.example.mentorapp.subscriberDetails.domain.model.UserDetailEntity;
 import com.globant.example.mentorapp.subscriberDetails.domain.response.UserDetailResponseEntity;
 import com.squareup.otto.Bus;
@@ -50,7 +51,9 @@ public class FetchUserDetailsInteractor {
 
             @Override
             public void onFailure(Call<UserDetailEntity> call, Throwable t) {
-
+                builderEntity.withResponseText(ApiUtils.SERVICE_RESPONSE_COMM_ERROR);
+                builderEntity.withResponseCode(EventApiResponseEntity.CONNECTION_ERROR);
+                bus.post(builderEntity.build());
             }
         });
     }

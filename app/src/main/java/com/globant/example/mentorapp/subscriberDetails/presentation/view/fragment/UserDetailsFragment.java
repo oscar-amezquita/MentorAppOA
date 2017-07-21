@@ -20,8 +20,8 @@ import com.globant.example.mentorapp.R;
 import com.globant.example.mentorapp.data.livedata.SharedViewModel;
 import com.globant.example.mentorapp.mvp.base.BaseActivity;
 import com.globant.example.mentorapp.mvp.base.BaseView;
-import com.globant.example.mentorapp.subscriberDetails.presentation.model.DetailsModel;
 import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryModel;
+import com.globant.example.mentorapp.subscriberDetails.presentation.model.UserDetailsModel;
 import com.globant.example.mentorapp.subscriberDetails.presentation.model.UserDetailsViewModel;
 import com.globant.example.mentorapp.subscriberDetails.presentation.presenter.UserDetailsPresenter;
 import com.globant.example.mentorapp.subscriberDetails.presentation.view.adapter.UserRepositoriesAdapter;
@@ -42,7 +42,7 @@ public class UserDetailsFragment extends LifecycleFragment implements BaseView<U
     private BaseActivity parent;
     private UserRepositoriesAdapter listRepoAdapter;
     private RecyclerView listReposRecyclerView;
-    private DetailsModel userDetails;
+    private UserDetailsModel userDetails;
     private TextView userName;
     private TextView userLocation;
     private TextView company;
@@ -145,16 +145,16 @@ public class UserDetailsFragment extends LifecycleFragment implements BaseView<U
     }
 
     private void subscribeUserDetails() {
-        final Observer<DetailsModel> usersObserver = new Observer<DetailsModel>() {
+        final Observer<UserDetailsModel> usersObserver = new Observer<UserDetailsModel>() {
             @Override
-            public void onChanged(@Nullable DetailsModel detailsModel) {
+            public void onChanged(@Nullable UserDetailsModel detailsModel) {
                 setUserInformation(detailsModel);
             }
         };
         model.getUserDetails().observe(this, usersObserver);
     }
 
-    private void setUserInformation(DetailsModel userDetails) {
+    private void setUserInformation(UserDetailsModel userDetails) {
         userName.setText(
                 String.format(getActivity().getString(R.string.tv_detail_user_name), userDetails.getUserName()));
         userLocation.setText(
@@ -165,7 +165,6 @@ public class UserDetailsFragment extends LifecycleFragment implements BaseView<U
                 String.format(getActivity().getString(R.string.tv_detail_followers), userDetails.getFollowers()));
         following.setText(
                 String.format(getActivity().getString(R.string.tv_detail_following), userDetails.getFollowing()));
-
 
         Picasso.with(getActivity()).load(userDetails.getImageUrl())
                 .error(R.drawable.ic_not_found)
@@ -181,7 +180,6 @@ public class UserDetailsFragment extends LifecycleFragment implements BaseView<U
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
     }
 
     @Override
@@ -202,5 +200,4 @@ public class UserDetailsFragment extends LifecycleFragment implements BaseView<U
         presenter.unregisterBus();
         presenter.detachView();
     }
-
 }

@@ -9,8 +9,8 @@ import com.globant.example.mentorapp.subscriberDetails.domain.model.ListReposEnt
 import com.globant.example.mentorapp.subscriberDetails.domain.model.UserDetailEntity;
 import com.globant.example.mentorapp.subscriberDetails.domain.response.RepoListResponseEntity;
 import com.globant.example.mentorapp.subscriberDetails.domain.response.UserDetailResponseEntity;
-import com.globant.example.mentorapp.subscriberDetails.presentation.model.DetailsModel;
 import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryModel;
+import com.globant.example.mentorapp.subscriberDetails.presentation.model.UserDetailsModel;
 import com.globant.example.mentorapp.subscriberDetails.presentation.model.UserDetailsViewModel;
 import com.google.common.base.Function;
 import com.google.common.collect.FluentIterable;
@@ -41,12 +41,12 @@ public class UserDetailsPresenter extends BasePresenter {
     /**
      * Translate Domain UserEntity list to Presentation ModelUserEntity list
      */
-    private static Function<UserDetailEntity, DetailsModel> transformToModelUser() {
-        return new Function<UserDetailEntity, DetailsModel>() {
+    private static Function<UserDetailEntity, UserDetailsModel> transformToModelUser() {
+        return new Function<UserDetailEntity, UserDetailsModel>() {
             @Nullable
             @Override
-            public DetailsModel apply(@Nullable UserDetailEntity input) {
-                DetailsModel.Builder builder = new DetailsModel.Builder();
+            public UserDetailsModel apply(@Nullable UserDetailEntity input) {
+                UserDetailsModel.Builder builder = new UserDetailsModel.Builder();
                 builder.withUserName(input.getName())
                         .withCompany(input.getCompany())
                         .withLocation(input.getLocation())

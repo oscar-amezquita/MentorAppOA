@@ -3,6 +3,7 @@ package com.globant.example.mentorapp.subscriberDetails.domain.model;
 import com.google.gson.annotations.SerializedName;
 
 /**
+ * Entity class to manage repository information that comes from the GitHub service
  * Created by oscar.amezquita on 17/07/2017.
  */
 
@@ -149,7 +150,7 @@ public class ListReposEntity {
         return fullName;
     }
 
-    public Boolean get_private() {
+    public Boolean getPrivate() {
         return _private;
     }
 
