@@ -93,6 +93,7 @@
         android:layout_marginTop="@dimen/default_separator_margin" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_repo_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="@dimen/list_general_margin"
