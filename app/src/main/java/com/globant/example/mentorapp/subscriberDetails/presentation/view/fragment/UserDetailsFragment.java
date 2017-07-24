@@ -78,7 +78,7 @@ public class UserDetailsFragment extends LifecycleFragment implements BaseView<U
         userImageView = (ImageView) view.findViewById(R.id.imgDetailUser);
 
         if (model.getUserDetails().getValue() != null && model.getUserRepos().getValue() != null) {
-            listRepoAdapter = new UserRepositoriesAdapter(model.getUserRepos().getValue(), getActivity());
+            listRepoAdapter = new UserRepositoriesAdapter(model.getUserRepos().getValue());
             totalRepositories.setText(
                     String.format(getActivity().getString(R.string.tv_detail_repositories), model.getUserRepos().getValue().size()));
             userDetails = model.getUserDetails().getValue();
@@ -137,7 +137,7 @@ public class UserDetailsFragment extends LifecycleFragment implements BaseView<U
         final Observer<List<RepositoryModel>> usersObserver = new Observer<List<RepositoryModel>>() {
             @Override
             public void onChanged(@Nullable List<RepositoryModel> repositoryViewModelList) {
-                listRepoAdapter = new UserRepositoriesAdapter(repositoryViewModelList, getContext());
+                listRepoAdapter = new UserRepositoriesAdapter(repositoryViewModelList);
                 usersRepositoryListReady(listReposRecyclerView, listRepoAdapter);
             }
         };
@@ -188,7 +188,7 @@ public class UserDetailsFragment extends LifecycleFragment implements BaseView<U
         presenter.registerBus();
         presenter.attachView(this);
         if (model.getUserDetails().getValue() == null || model.getUserRepos() == null) {
-            presenter.getUserDetails(getArguments().getString("userId"));
+            presenter.getUserDetails(getArguments().getString(getString(R.string.bundle_selected_user_id)));
             subscribeRepoList();
             subscribeUserDetails();
         }

@@ -60,7 +60,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(
                 getResources().getInteger(R.integer.number_of_users_columns), LinearLayoutManager.VERTICAL);
         if (model.getUsers() != null || model.getUsers().getValue() != null) {
-            listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue(), getContext(), this);
+            listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue(), this);
             parent.hideProgress();
         }
         listUsersRecyclerView = (RecyclerView) view.findViewById(R.id.list_item_container);
@@ -92,7 +92,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
     }
 
     private void usersReady() {
-        listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue(), getContext(), this);
+        listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue(), this);
         listUsersRecyclerView.setAdapter(listUsersAdapter);
         listUsersAdapter.notifyDataSetChanged();
     }
@@ -109,7 +109,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         final Observer<List<ModelUserEntity>> usersObserver = new Observer<List<ModelUserEntity>>() {
             @Override
             public void onChanged(@Nullable List<ModelUserEntity> userEntityList) {
-                listUsersAdapter = new ListUsersAdapter(userEntityList, getContext(), ListUsersViewFragment.this);
+                listUsersAdapter = new ListUsersAdapter(userEntityList, ListUsersViewFragment.this);
                 defineRecyclerView(listUsersRecyclerView, listUsersAdapter);
                 listUsersAdapter.notifyDataSetChanged();
             }
@@ -145,7 +145,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
     public void onUserSelected(String userId) {
         UserDetailsFragment detailsFragment = UserDetailsFragment.getInstance();
         Bundle bundle = new Bundle();
-        bundle.putString("userId", userId);
+        bundle.putString(getString(R.string.bundle_selected_user_id), userId);
         detailsFragment.setArguments(bundle);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, detailsFragment)
