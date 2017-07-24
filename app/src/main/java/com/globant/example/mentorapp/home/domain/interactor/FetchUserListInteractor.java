@@ -3,9 +3,9 @@ package com.globant.example.mentorapp.home.domain.interactor;
 import android.support.annotation.NonNull;
 
 import com.globant.example.mentorapp.data.remote.APIService;
-import com.globant.example.mentorapp.data.remote.EventApiResponseEntity;
 import com.globant.example.mentorapp.data.util.ApiUtils;
 import com.globant.example.mentorapp.home.domain.model.UserEntity;
+import com.globant.example.mentorapp.home.domain.response.UserListResponseEntity;
 import com.squareup.otto.Bus;
 
 import java.util.List;
@@ -36,7 +36,7 @@ public class FetchUserListInteractor {
      * Obtain a list of Users from service, Response is send using otto using Asyncronous form.
      */
     public void execute() {
-        final EventApiResponseEntity.Builder<List<UserEntity>> builderEntity = new EventApiResponseEntity.Builder<>();
+        final UserListResponseEntity.UserListResponseEntityBuilder builderEntity = new UserListResponseEntity.UserListResponseEntityBuilder();
         apiService.getUsers(ApiUtils.PROFILE_NAME_GITHUB, ApiUtils.PROFILE_REPOSITORY)
                 .enqueue(new Callback<List<UserEntity>>() {
                     @Override
@@ -45,7 +45,7 @@ public class FetchUserListInteractor {
                         builderEntity.withResponseText(response.message());
                         builderEntity.withResponseCode(response.code());
                         if (response.isSuccessful()) {
-                            builderEntity.withResponseCode(EventApiResponseEntity.HTTP_OK);
+                            builderEntity.withResponseCode(UserListResponseEntity.HTTP_OK);
                             builderEntity.withEntityList(response.body());
                         }
                         bus.post(builderEntity.build());
@@ -54,7 +54,7 @@ public class FetchUserListInteractor {
                     @Override
                     public void onFailure(@NonNull Call<List<UserEntity>> call, @NonNull Throwable t) {
                         builderEntity.withResponseText(ApiUtils.SERVICE_RESPONSE_COMM_ERROR);
-                        builderEntity.withResponseCode(EventApiResponseEntity.CONNECTION_ERROR);
+                        builderEntity.withResponseCode(UserListResponseEntity.CONNECTION_ERROR);
                         bus.post(builderEntity.build());
                     }
                 });

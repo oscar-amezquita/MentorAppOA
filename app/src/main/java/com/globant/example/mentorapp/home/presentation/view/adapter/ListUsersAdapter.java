@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.globant.example.mentorapp.R;
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
 import com.globant.example.mentorapp.mvp.base.BaseRecyclerViewAdapter;
+import com.globant.example.mentorapp.util.Utilities;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -26,16 +27,16 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
     private Context context;
     private BaseRecyclerViewAdapter.onUserClick listener;
 
-    public ListUsersAdapter(List<ModelUserEntity> users, Context context, BaseRecyclerViewAdapter.onUserClick listener) {
+    public ListUsersAdapter(List<ModelUserEntity> users, BaseRecyclerViewAdapter.onUserClick listener) {
         this.users = users;
-        this.context = context;
         this.listener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_users_adapter, null);
-        return new ViewHolder(view, context);
+        context = parent.getContext();
+        return new ViewHolder(view);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
     @Override
     public int getItemCount() {
-        return users != null ? users.size() : context.getResources().getInteger(R.integer.zero_constant);
+        return users != null ? users.size() : Utilities.ZERO_CONSTANT;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -58,7 +59,7 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
         private TextView userNameTextView;
         private ImageView userImage;
 
-        ViewHolder(View itemView, final Context context) {
+        ViewHolder(View itemView) {
             super(itemView);
             userNameTextView = (TextView) itemView.findViewById(R.id.textName);
             userImage = (ImageView) itemView.findViewById(R.id.imageUser);
