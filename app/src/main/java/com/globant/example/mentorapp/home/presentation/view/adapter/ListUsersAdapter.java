@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.globant.example.mentorapp.R;
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
 import com.globant.example.mentorapp.mvp.base.BaseRecyclerViewAdapter;
+import com.globant.example.mentorapp.util.Utilities;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -28,7 +29,6 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
     public ListUsersAdapter(List<ModelUserEntity> users, BaseRecyclerViewAdapter.onUserClick listener) {
         this.users = users;
-        this.context = context;
         this.listener = listener;
     }
 
