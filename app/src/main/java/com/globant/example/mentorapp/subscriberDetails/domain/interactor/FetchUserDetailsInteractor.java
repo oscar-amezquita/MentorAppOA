@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.globant.example.mentorapp.data.remote.APIService;
 import com.globant.example.mentorapp.data.remote.EventApiResponseEntity;
 import com.globant.example.mentorapp.data.util.ApiUtils;
+import com.globant.example.mentorapp.mvp.base.BaseInteractor;
 import com.globant.example.mentorapp.subscriberDetails.domain.model.UserDetailEntity;
 import com.globant.example.mentorapp.subscriberDetails.domain.response.UserDetailResponseEntity;
 import com.squareup.otto.Bus;
@@ -20,15 +21,11 @@ import retrofit2.Response;
  * Created by oscar.amezquita on 14/07/2017.
  */
 
-public class FetchUserDetailsInteractor {
-
-    private APIService apiService;
-    private Bus bus;
+public class FetchUserDetailsInteractor extends BaseInteractor {
 
     @Inject
     public FetchUserDetailsInteractor(APIService apiService, Bus bus) {
-        this.apiService = apiService;
-        this.bus = bus;
+        super(apiService, bus);
     }
 
     /**

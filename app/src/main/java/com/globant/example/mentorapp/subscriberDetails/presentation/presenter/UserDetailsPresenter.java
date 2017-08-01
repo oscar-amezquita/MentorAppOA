@@ -5,7 +5,7 @@ import com.globant.example.mentorapp.mvp.base.BaseModel;
 import com.globant.example.mentorapp.mvp.base.BasePresenter;
 import com.globant.example.mentorapp.subscriberDetails.domain.interactor.FetchReposListInteractor;
 import com.globant.example.mentorapp.subscriberDetails.domain.interactor.FetchUserDetailsInteractor;
-import com.globant.example.mentorapp.subscriberDetails.domain.model.ListReposEntity;
+import com.globant.example.mentorapp.subscriberDetails.domain.model.RepoEntity;
 import com.globant.example.mentorapp.subscriberDetails.domain.model.UserDetailEntity;
 import com.globant.example.mentorapp.subscriberDetails.domain.response.RepoListResponseEntity;
 import com.globant.example.mentorapp.subscriberDetails.domain.response.UserDetailResponseEntity;
@@ -29,7 +29,6 @@ public class UserDetailsPresenter extends BasePresenter {
 
     private FetchUserDetailsInteractor fetchUserDetailsInteractor;
     private FetchReposListInteractor fetchReposListInteractor;
-    private String userId;
 
     @Inject
     public UserDetailsPresenter(FetchUserDetailsInteractor fetchUserDetailsInteractor, FetchReposListInteractor fetchReposListInteractor, Bus bus) {
@@ -59,13 +58,13 @@ public class UserDetailsPresenter extends BasePresenter {
     }
 
     /**
-     * Translate Domain ListReposEntity list to Presentation RepositoryModel list
+     * Translate Domain RepoEntity list to Presentation RepositoryModel list
      */
-    private static Function<ListReposEntity, RepositoryModel> transformToRepoList() {
-        return new Function<ListReposEntity, RepositoryModel>() {
+    private static Function<RepoEntity, RepositoryModel> transformToRepoList() {
+        return new Function<RepoEntity, RepositoryModel>() {
             @Nullable
             @Override
-            public RepositoryModel apply(@Nullable ListReposEntity input) {
+            public RepositoryModel apply(@Nullable RepoEntity input) {
                 return new RepositoryModel(input.getName(), input.getHtmlUrl());
             }
         };

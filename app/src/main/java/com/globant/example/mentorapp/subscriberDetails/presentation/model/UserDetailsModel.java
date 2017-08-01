@@ -7,12 +7,12 @@ package com.globant.example.mentorapp.subscriberDetails.presentation.model;
 
 public class UserDetailsModel {
 
-    private String imageUrl;
-    private String userName;
-    private String location;
-    private String company;
-    private int followers;
-    private int following;
+    private final String imageUrl;
+    private final String userName;
+    private final String location;
+    private final String company;
+    private final int followers;
+    private final int following;
 
     private UserDetailsModel(Builder builder) {
         userName = builder.userName;

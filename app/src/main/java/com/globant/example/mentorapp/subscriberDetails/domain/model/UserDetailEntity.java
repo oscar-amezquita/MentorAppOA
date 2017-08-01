@@ -50,8 +50,8 @@ public class UserDetailEntity {
     private Integer publicRepos;
     @SerializedName("public_gists")
     private Integer publicGists;
-    private Integer followers;
-    private Integer following;
+    private int followers;
+    private int following;
     @SerializedName("created_at")
     private String createdAt;
     @SerializedName("updated_at")
@@ -161,11 +161,11 @@ public class UserDetailEntity {
         return publicGists;
     }
 
-    public Integer getFollowers() {
+    public int getFollowers() {
         return followers;
     }
 
-    public Integer getFollowing() {
+    public int getFollowing() {
         return following;
     }
 

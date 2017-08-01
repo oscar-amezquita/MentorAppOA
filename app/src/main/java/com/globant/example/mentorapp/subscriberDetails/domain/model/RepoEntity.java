@@ -7,7 +7,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by oscar.amezquita on 17/07/2017.
  */
 
-public class ListReposEntity {
+public class RepoEntity {
 
 
     private Integer id;

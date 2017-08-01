@@ -1,7 +1,7 @@
 package com.globant.example.mentorapp.subscriberDetails.domain.response;
 
 import com.globant.example.mentorapp.data.remote.EventApiResponseEntity;
-import com.globant.example.mentorapp.subscriberDetails.domain.model.ListReposEntity;
+import com.globant.example.mentorapp.subscriberDetails.domain.model.RepoEntity;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import java.util.List;
  * Created by oscar.amezquita on 19/07/2017.
  */
 
-public class RepoListResponseEntity extends EventApiResponseEntity<List<ListReposEntity>> {
+public class RepoListResponseEntity extends EventApiResponseEntity<List<RepoEntity>> {
 
     private RepoListResponseEntity(Builder builder) {
         super(builder);

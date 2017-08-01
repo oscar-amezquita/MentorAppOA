@@ -20,7 +20,6 @@ import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
 import com.globant.example.mentorapp.home.presentation.presenter.ListUsersPresenterImpl;
 import com.globant.example.mentorapp.home.presentation.view.adapter.ListUsersAdapter;
 import com.globant.example.mentorapp.mvp.base.BaseActivity;
-import com.globant.example.mentorapp.mvp.base.BaseRecyclerViewAdapter;
 import com.globant.example.mentorapp.mvp.base.BaseView;
 import com.globant.example.mentorapp.subscriberDetails.presentation.view.fragment.UserDetailsFragment;
 
@@ -31,7 +30,7 @@ import javax.inject.Inject;
 /**
  * A placeholder fragment containing a list of Users with his name.
  */
-public class ListUsersViewFragment extends LifecycleFragment implements BaseView<ListUsersViewModel>, BaseRecyclerViewAdapter.onUserClick {
+public class ListUsersViewFragment extends LifecycleFragment implements BaseView<ListUsersViewModel> {
 
     public static final String LIST_TAG = "listUserFragment";
     @Inject
@@ -60,7 +59,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(
                 getResources().getInteger(R.integer.number_of_users_columns), LinearLayoutManager.VERTICAL);
         if (model.getUsers() != null || model.getUsers().getValue() != null) {
-            listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue(), this);
+            listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue());
             parent.hideProgress();
         }
         listUsersRecyclerView = (RecyclerView) view.findViewById(R.id.list_item_container);
@@ -92,7 +91,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
     }
 
     private void usersReady() {
-        listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue(), this);
+        listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue());
         listUsersRecyclerView.setAdapter(listUsersAdapter);
         listUsersAdapter.notifyDataSetChanged();
     }
@@ -109,7 +108,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         final Observer<List<ModelUserEntity>> usersObserver = new Observer<List<ModelUserEntity>>() {
             @Override
             public void onChanged(@Nullable List<ModelUserEntity> userEntityList) {
-                listUsersAdapter = new ListUsersAdapter(userEntityList, ListUsersViewFragment.this);
+                listUsersAdapter = new ListUsersAdapter(userEntityList);
                 defineRecyclerView(listUsersRecyclerView, listUsersAdapter);
                 listUsersAdapter.notifyDataSetChanged();
             }
@@ -141,7 +140,6 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         listUsersRecyclerView.setAdapter(adapter);
     }
 
-    @Override
     public void onUserSelected(String userId) {
         UserDetailsFragment detailsFragment = UserDetailsFragment.getInstance();
         Bundle bundle = new Bundle();

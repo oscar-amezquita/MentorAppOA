@@ -6,6 +6,7 @@ import com.globant.example.mentorapp.data.remote.APIService;
 import com.globant.example.mentorapp.data.util.ApiUtils;
 import com.globant.example.mentorapp.home.domain.model.UserEntity;
 import com.globant.example.mentorapp.home.domain.response.UserListResponseEntity;
+import com.globant.example.mentorapp.mvp.base.BaseInteractor;
 import com.squareup.otto.Bus;
 
 import java.util.List;
@@ -21,15 +22,11 @@ import retrofit2.Response;
  * Created by oscar.amezquita on 9/06/2017.
  */
 
-public class FetchUserListInteractor {
-
-    private APIService apiService;
-    private Bus bus;
+public class FetchUserListInteractor extends BaseInteractor {
 
     @Inject
     public FetchUserListInteractor(APIService apiService, Bus bus) {
-        this.apiService = apiService;
-        this.bus = bus;
+        super(apiService, bus);
     }
 
     /**

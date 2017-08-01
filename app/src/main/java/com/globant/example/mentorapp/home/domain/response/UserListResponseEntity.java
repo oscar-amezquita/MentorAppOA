@@ -6,6 +6,7 @@ import com.globant.example.mentorapp.home.domain.model.UserEntity;
 import java.util.List;
 
 /**
+ * Class to manage otto responses from User List
  * Created by oscar.amezquita on 24/07/2017.
  */
 

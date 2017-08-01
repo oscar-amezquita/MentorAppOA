@@ -10,7 +10,8 @@ import android.widget.TextView;
 
 import com.globant.example.mentorapp.R;
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
-import com.globant.example.mentorapp.mvp.base.BaseRecyclerViewAdapter;
+import com.globant.example.mentorapp.home.presentation.view.activity.HomeScreenActivity;
+import com.globant.example.mentorapp.home.presentation.view.fragment.ListUsersViewFragment;
 import com.globant.example.mentorapp.util.Utilities;
 import com.squareup.picasso.Picasso;
 
@@ -25,25 +26,25 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
     private List<ModelUserEntity> users;
     private Context context;
-    private BaseRecyclerViewAdapter.onUserClick listener;
+    private ListUsersViewFragment fragmentListener;
 
-    public ListUsersAdapter(List<ModelUserEntity> users, BaseRecyclerViewAdapter.onUserClick listener) {
+    public ListUsersAdapter(List<ModelUserEntity> users) {
         this.users = users;
-        this.listener = listener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_users_adapter, null);
         context = parent.getContext();
+        fragmentListener = (ListUsersViewFragment) ((HomeScreenActivity) context).getSupportFragmentManager().findFragmentByTag(ListUsersViewFragment.LIST_TAG);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        ModelUserEntity user = users.get(position);
-        holder.userNameTextView.setText(user.getName());
-        Picasso.with(context).load(user.getImageUrl())
+        holder.user = users.get(position);
+        holder.userNameTextView.setText(holder.user.getName());
+        Picasso.with(context).load(holder.user.getImageUrl())
                 .error(R.drawable.ic_not_found)
                 .placeholder(R.drawable.ic_placeholder)
                 .into(holder.userImage);
@@ -58,6 +59,7 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
         private TextView userNameTextView;
         private ImageView userImage;
+        private ModelUserEntity user;
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -66,7 +68,7 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    listener.onUserSelected(userNameTextView.getText().toString());
+                    fragmentListener.onUserSelected(user.getName());
                 }
             });
         }
