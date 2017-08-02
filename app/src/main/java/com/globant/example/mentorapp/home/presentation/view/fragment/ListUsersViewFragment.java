@@ -59,7 +59,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(
                 getResources().getInteger(R.integer.number_of_users_columns), LinearLayoutManager.VERTICAL);
         if (model.getUsers() != null || model.getUsers().getValue() != null) {
-            listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue());
+            listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue(), new OnUserClickListener());
             parent.hideProgress();
         }
         listUsersRecyclerView = (RecyclerView) view.findViewById(R.id.list_item_container);
@@ -91,7 +91,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
     }
 
     private void usersReady() {
-        listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue());
+        listUsersAdapter = new ListUsersAdapter(model.getUsers().getValue(), new OnUserClickListener());
         listUsersRecyclerView.setAdapter(listUsersAdapter);
         listUsersAdapter.notifyDataSetChanged();
     }
@@ -108,7 +108,7 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         final Observer<List<ModelUserEntity>> usersObserver = new Observer<List<ModelUserEntity>>() {
             @Override
             public void onChanged(@Nullable List<ModelUserEntity> userEntityList) {
-                listUsersAdapter = new ListUsersAdapter(userEntityList);
+                listUsersAdapter = new ListUsersAdapter(userEntityList, new OnUserClickListener());
                 defineRecyclerView(listUsersRecyclerView, listUsersAdapter);
                 listUsersAdapter.notifyDataSetChanged();
             }
@@ -140,14 +140,18 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         listUsersRecyclerView.setAdapter(adapter);
     }
 
-    public void onUserSelected(String userId) {
-        UserDetailsFragment detailsFragment = UserDetailsFragment.getInstance();
-        Bundle bundle = new Bundle();
-        bundle.putString(getString(R.string.bundle_selected_user_id), userId);
-        detailsFragment.setArguments(bundle);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, detailsFragment)
-                .addToBackStack(null)
-                .commit();
+    public class OnUserClickListener {
+
+        public void onUserSelected(String userId) {
+            UserDetailsFragment detailsFragment = UserDetailsFragment.getInstance();
+            Bundle bundle = new Bundle();
+            bundle.putString(getString(R.string.bundle_selected_user_id), userId);
+            detailsFragment.setArguments(bundle);
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, detailsFragment)
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }
+

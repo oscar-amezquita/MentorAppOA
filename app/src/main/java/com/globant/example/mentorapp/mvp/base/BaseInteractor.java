@@ -9,9 +9,8 @@ import com.squareup.otto.Bus;
  */
 
 public class BaseInteractor {
-    protected APIService apiService;
-    protected Bus bus;
-
+    protected final APIService apiService;
+    protected final Bus bus;
 
     public BaseInteractor(APIService apiService, Bus bus) {
         this.apiService = apiService;

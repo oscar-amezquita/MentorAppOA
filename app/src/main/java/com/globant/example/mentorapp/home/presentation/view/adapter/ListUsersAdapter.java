@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.globant.example.mentorapp.R;
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
-import com.globant.example.mentorapp.home.presentation.view.activity.HomeScreenActivity;
 import com.globant.example.mentorapp.home.presentation.view.fragment.ListUsersViewFragment;
 import com.globant.example.mentorapp.util.Utilities;
 import com.squareup.picasso.Picasso;
@@ -18,7 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 /**
- * Custom adapter to show General data fro users.
+ * Custom adapter to show General data from users.
  * Created by oscar.amezquita on 8/06/2017.
  */
 
@@ -26,25 +25,26 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
     private List<ModelUserEntity> users;
     private Context context;
-    private ListUsersViewFragment fragmentListener;
+    private ListUsersViewFragment.OnUserClickListener onUserClickListener;
 
-    public ListUsersAdapter(List<ModelUserEntity> users) {
+    public ListUsersAdapter(List<ModelUserEntity> users, ListUsersViewFragment.OnUserClickListener onUserClick) {
         this.users = users;
+        this.onUserClickListener = onUserClick;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_users_adapter, null);
         context = parent.getContext();
-        fragmentListener = (ListUsersViewFragment) ((HomeScreenActivity) context).getSupportFragmentManager().findFragmentByTag(ListUsersViewFragment.LIST_TAG);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.user = users.get(position);
-        holder.userNameTextView.setText(holder.user.getName());
-        Picasso.with(context).load(holder.user.getImageUrl())
+        ModelUserEntity userData = users.get(position);
+        holder.user = userData;
+        holder.userNameTextView.setText(userData.getName());
+        Picasso.with(context).load(userData.getImageUrl())
                 .error(R.drawable.ic_not_found)
                 .placeholder(R.drawable.ic_placeholder)
                 .into(holder.userImage);
@@ -68,7 +68,7 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    fragmentListener.onUserSelected(user.getName());
+                    onUserClickListener.onUserSelected(user.getName());
                 }
             });
         }
