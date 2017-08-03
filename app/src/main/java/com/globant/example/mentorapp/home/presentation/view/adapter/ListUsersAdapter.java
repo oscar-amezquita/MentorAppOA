@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.globant.example.mentorapp.R;
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
-import com.globant.example.mentorapp.home.presentation.view.fragment.ListUsersViewFragment;
 import com.globant.example.mentorapp.util.Utilities;
 import com.squareup.picasso.Picasso;
 
@@ -25,9 +24,9 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
     private List<ModelUserEntity> users;
     private Context context;
-    private ListUsersViewFragment.OnUserClickListener onUserClickListener;
+    private selectionListener onUserClickListener;
 
-    public ListUsersAdapter(List<ModelUserEntity> users, ListUsersViewFragment.OnUserClickListener onUserClick) {
+    public ListUsersAdapter(List<ModelUserEntity> users, selectionListener onUserClick) {
         this.users = users;
         this.onUserClickListener = onUserClick;
     }
@@ -53,6 +52,10 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
     @Override
     public int getItemCount() {
         return users != null ? users.size() : Utilities.ZERO_CONSTANT;
+    }
+
+    public interface selectionListener {
+        void onUserSelected(String id);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
