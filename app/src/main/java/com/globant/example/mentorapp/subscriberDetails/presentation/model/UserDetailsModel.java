@@ -58,9 +58,6 @@ public class UserDetailsModel {
         private int followers;
         private int following;
 
-        public Builder() {
-        }
-
         /**
          * Sets the {@code userName} and returns a reference to this Builder so that the methods can be chained together.
          *

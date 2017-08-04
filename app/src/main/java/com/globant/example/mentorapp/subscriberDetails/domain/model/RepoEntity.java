@@ -10,16 +10,16 @@ import com.google.gson.annotations.SerializedName;
 public class RepoEntity {
 
 
-    private Integer id;
+    private int id;
     private String name;
     @SerializedName("full_name")
     private String fullName;
     @SerializedName("private")
-    private Boolean _private;
+    private boolean private_;
     @SerializedName("html_url")
     private String htmlUrl;
     private Object description;
-    private Boolean fork;
+    private boolean fork;
     private String url;
     @SerializedName("forks_url")
     private String forksUrl;
@@ -108,37 +108,37 @@ public class RepoEntity {
     @SerializedName("svn_url")
     private String svnUrl;
     private String homepage;
-    private Integer size;
+    private int size;
     @SerializedName("stargazers_count")
-    private Integer stargazersCount;
+    private int stargazersCount;
     @SerializedName("watchers_count")
-    private Integer watchersCount;
+    private int watchersCount;
     private String language;
     @SerializedName("has_issues")
-    private Boolean hasIssues;
+    private boolean hasIssues;
     @SerializedName("has_projects")
-    private Boolean hasProjects;
+    private boolean hasProjects;
     @SerializedName("has_downloads")
-    private Boolean hasDownloads;
+    private boolean hasDownloads;
     @SerializedName("has_wiki")
-    private Boolean hasWiki;
+    private boolean hasWiki;
     @SerializedName("has_pages")
-    private Boolean hasPages;
+    private boolean hasPages;
     @SerializedName("forks_count")
-    private Integer forksCount;
+    private int forksCount;
     @SerializedName("mirror_url")
     private Object mirrorUrl;
     @SerializedName("open_issues_count")
-    private Integer openIssuesCount;
+    private int openIssuesCount;
     @SerializedName("forks")
-    private Integer forks;
+    private int forks;
     @SerializedName("open_issues")
-    private Integer openIssues;
-    private Integer watchers;
+    private int openIssues;
+    private int watchers;
     @SerializedName("default_branch")
     private String defaultBranch;
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -150,8 +150,8 @@ public class RepoEntity {
         return fullName;
     }
 
-    public Boolean getPrivate() {
-        return _private;
+    public boolean getPrivate() {
+        return private_;
     }
 
     public String getHtmlUrl() {
@@ -162,7 +162,7 @@ public class RepoEntity {
         return description;
     }
 
-    public Boolean getFork() {
+    public boolean getFork() {
         return fork;
     }
 
@@ -346,15 +346,15 @@ public class RepoEntity {
         return homepage;
     }
 
-    public Integer getSize() {
+    public int getSize() {
         return size;
     }
 
-    public Integer getStargazersCount() {
+    public int getStargazersCount() {
         return stargazersCount;
     }
 
-    public Integer getWatchersCount() {
+    public int getWatchersCount() {
         return watchersCount;
     }
 
@@ -362,27 +362,27 @@ public class RepoEntity {
         return language;
     }
 
-    public Boolean getHasIssues() {
+    public boolean getHasIssues() {
         return hasIssues;
     }
 
-    public Boolean getHasProjects() {
+    public boolean getHasProjects() {
         return hasProjects;
     }
 
-    public Boolean getHasDownloads() {
+    public boolean getHasDownloads() {
         return hasDownloads;
     }
 
-    public Boolean getHasWiki() {
+    public boolean getHasWiki() {
         return hasWiki;
     }
 
-    public Boolean getHasPages() {
+    public boolean getHasPages() {
         return hasPages;
     }
 
-    public Integer getForksCount() {
+    public int getForksCount() {
         return forksCount;
     }
 
@@ -390,19 +390,19 @@ public class RepoEntity {
         return mirrorUrl;
     }
 
-    public Integer getOpenIssuesCount() {
+    public int getOpenIssuesCount() {
         return openIssuesCount;
     }
 
-    public Integer getForks() {
+    public int getForks() {
         return forks;
     }
 
-    public Integer getOpenIssues() {
+    public int getOpenIssues() {
         return openIssues;
     }
 
-    public Integer getWatchers() {
+    public int getWatchers() {
         return watchers;
     }
 

@@ -1,9 +1,7 @@
 package com.globant.example.mentorapp.subscriberDetails.presentation.view.fragment;
 
 
-import android.arch.lifecycle.LifecycleFragment;
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
@@ -17,8 +15,7 @@ import android.widget.TextView;
 
 import com.globant.example.mentorapp.MentorApplication;
 import com.globant.example.mentorapp.R;
-import com.globant.example.mentorapp.data.livedata.SharedViewModel;
-import com.globant.example.mentorapp.mvp.base.BaseActivity;
+import com.globant.example.mentorapp.mvp.base.BaseFragment;
 import com.globant.example.mentorapp.mvp.base.BaseView;
 import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryModel;
 import com.globant.example.mentorapp.subscriberDetails.presentation.model.UserDetailsModel;
@@ -34,12 +31,10 @@ import javax.inject.Inject;
 /**
  * A placeholder fragment some details of the selected user.
  */
-public class UserDetailsFragment extends LifecycleFragment implements BaseView<UserDetailsViewModel> {
+public class UserDetailsFragment extends BaseFragment implements BaseView<UserDetailsViewModel> {
 
     @Inject
     public UserDetailsPresenter presenter;
-    private SharedViewModel model;
-    private BaseActivity parent;
     private UserRepositoriesAdapter listRepoAdapter;
     private RecyclerView listReposRecyclerView;
     private UserDetailsModel userDetails;
@@ -65,9 +60,6 @@ public class UserDetailsFragment extends LifecycleFragment implements BaseView<U
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_details, container, false);
-        model = ViewModelProviders.of(this).get(SharedViewModel.class);
-        parent = (BaseActivity) getActivity();
-
         listReposRecyclerView = (RecyclerView) view.findViewById(R.id.list_repo_container);
         userName = (TextView) view.findViewById(R.id.txtUserName);
         userLocation = (TextView) view.findViewById(R.id.txtLocation);
@@ -111,10 +103,10 @@ public class UserDetailsFragment extends LifecycleFragment implements BaseView<U
         if (detailsViewModel.getError() != null) {
             switch (detailsViewModel.getError()) {
                 case ERROR_CONNECTION:
-                    usersErrorConnectivity();
+                    showErrorMessage(getString(R.string.communication_error_message));
                     break;
                 case ERROR_RESPONSE:
-                    usersErrorHttp();
+                    showErrorMessage(getString(R.string.http_error_message));
                     break;
             }
         }
@@ -123,14 +115,6 @@ public class UserDetailsFragment extends LifecycleFragment implements BaseView<U
         } else {
             parent.hideProgress();
         }
-    }
-
-    private void usersErrorHttp() {
-        parent.simpleSnackBarMessage(getString(R.string.http_error_message));
-    }
-
-    private void usersErrorConnectivity() {
-        parent.simpleSnackBarMessage(getString(R.string.communication_error_message));
     }
 
     private void subscribeRepoList() {

@@ -24,9 +24,9 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
 
     private List<ModelUserEntity> users;
     private Context context;
-    private selectionListener onUserClickListener;
+    private SelectionListener onUserClickListener;
 
-    public ListUsersAdapter(List<ModelUserEntity> users, selectionListener onUserClick) {
+    public ListUsersAdapter(List<ModelUserEntity> users, SelectionListener onUserClick) {
         this.users = users;
         this.onUserClickListener = onUserClick;
     }
@@ -54,7 +54,7 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
         return users != null ? users.size() : Utilities.ZERO_CONSTANT;
     }
 
-    public interface selectionListener {
+    public interface SelectionListener {
         void onUserSelected(String id);
     }
 

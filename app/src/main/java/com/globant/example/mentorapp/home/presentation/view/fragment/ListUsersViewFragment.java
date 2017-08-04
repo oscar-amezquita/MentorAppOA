@@ -1,8 +1,6 @@
 package com.globant.example.mentorapp.home.presentation.view.fragment;
 
-import android.arch.lifecycle.LifecycleFragment;
 import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,12 +12,11 @@ import android.view.ViewGroup;
 
 import com.globant.example.mentorapp.MentorApplication;
 import com.globant.example.mentorapp.R;
-import com.globant.example.mentorapp.data.livedata.SharedViewModel;
 import com.globant.example.mentorapp.home.presentation.model.ListUsersViewModel;
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
 import com.globant.example.mentorapp.home.presentation.presenter.ListUsersPresenterImpl;
 import com.globant.example.mentorapp.home.presentation.view.adapter.ListUsersAdapter;
-import com.globant.example.mentorapp.mvp.base.BaseActivity;
+import com.globant.example.mentorapp.mvp.base.BaseFragment;
 import com.globant.example.mentorapp.mvp.base.BaseView;
 import com.globant.example.mentorapp.subscriberDetails.presentation.view.fragment.UserDetailsFragment;
 
@@ -30,16 +27,14 @@ import javax.inject.Inject;
 /**
  * A placeholder fragment containing a list of Users with his name.
  */
-public class ListUsersViewFragment extends LifecycleFragment implements BaseView<ListUsersViewModel>, ListUsersAdapter.selectionListener {
+public class ListUsersViewFragment extends BaseFragment implements BaseView<ListUsersViewModel>, ListUsersAdapter.SelectionListener {
 
     public static final String LIST_TAG = "listUserFragment";
     @Inject
     public ListUsersPresenterImpl presenter;
     private StaggeredGridLayoutManager staggeredGridLayoutManager;
-    private SharedViewModel model;
     private ListUsersAdapter listUsersAdapter;
     private RecyclerView listUsersRecyclerView;
-    private BaseActivity parent;
 
     public static ListUsersViewFragment getInstance() {
         return new ListUsersViewFragment();
@@ -54,8 +49,6 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
-        model = ViewModelProviders.of(this).get(SharedViewModel.class);
-        parent = (BaseActivity) getActivity();
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(
                 getResources().getInteger(R.integer.number_of_users_columns), LinearLayoutManager.VERTICAL);
         if (model.getUsers() != null || model.getUsers().getValue() != null) {
@@ -75,10 +68,10 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         } else if (usersModel.getError() != null) {
             switch (usersModel.getError()) {
                 case ERROR_CONNECTION:
-                    usersErrorConnectivity();
+                    showErrorMessage(getString(R.string.communication_error_message));
                     break;
                 case ERROR_RESPONSE:
-                    usersErrorHttp();
+                    showErrorMessage(getString(R.string.http_error_message));
                     break;
             }
         }
@@ -96,13 +89,6 @@ public class ListUsersViewFragment extends LifecycleFragment implements BaseView
         listUsersAdapter.notifyDataSetChanged();
     }
 
-    private void usersErrorHttp() {
-        parent.simpleSnackBarMessage(getString(R.string.http_error_message));
-    }
-
-    private void usersErrorConnectivity() {
-        parent.simpleSnackBarMessage(getString(R.string.communication_error_message));
-    }
 
     private void subscribe() {
         final Observer<List<ModelUserEntity>> usersObserver = new Observer<List<ModelUserEntity>>() {
