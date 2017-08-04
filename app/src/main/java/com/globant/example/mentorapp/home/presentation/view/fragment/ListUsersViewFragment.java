@@ -1,6 +1,7 @@
 package com.globant.example.mentorapp.home.presentation.view.fragment;
 
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,10 +13,12 @@ import android.view.ViewGroup;
 
 import com.globant.example.mentorapp.MentorApplication;
 import com.globant.example.mentorapp.R;
+import com.globant.example.mentorapp.data.livedata.SharedViewModel;
 import com.globant.example.mentorapp.home.presentation.model.ListUsersViewModel;
 import com.globant.example.mentorapp.home.presentation.model.ModelUserEntity;
 import com.globant.example.mentorapp.home.presentation.presenter.ListUsersPresenterImpl;
 import com.globant.example.mentorapp.home.presentation.view.adapter.ListUsersAdapter;
+import com.globant.example.mentorapp.mvp.base.BaseActivity;
 import com.globant.example.mentorapp.mvp.base.BaseFragment;
 import com.globant.example.mentorapp.mvp.base.BaseView;
 import com.globant.example.mentorapp.subscriberDetails.presentation.view.fragment.UserDetailsFragment;
@@ -49,6 +52,8 @@ public class ListUsersViewFragment extends BaseFragment implements BaseView<List
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_screen, container, false);
+        model = ViewModelProviders.of(this).get(SharedViewModel.class);
+        parent = (BaseActivity) getActivity();
         staggeredGridLayoutManager = new StaggeredGridLayoutManager(
                 getResources().getInteger(R.integer.number_of_users_columns), LinearLayoutManager.VERTICAL);
         if (model.getUsers() != null || model.getUsers().getValue() != null) {

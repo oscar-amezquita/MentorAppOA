@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 public class UserEntity {
 
     private String login;
-    private Integer id;
+    private int id;
     @SerializedName("avatar_url")
     private String avatarUrl;
     @SerializedName("gravatar_id")
@@ -39,7 +39,7 @@ public class UserEntity {
         return login;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 

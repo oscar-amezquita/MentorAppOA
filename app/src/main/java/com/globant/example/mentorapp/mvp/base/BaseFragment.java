@@ -1,7 +1,6 @@
 package com.globant.example.mentorapp.mvp.base;
 
 import android.arch.lifecycle.LifecycleFragment;
-import android.arch.lifecycle.ViewModelProviders;
 
 import com.globant.example.mentorapp.data.livedata.SharedViewModel;
 
@@ -14,11 +13,6 @@ public class BaseFragment extends LifecycleFragment {
 
     protected BaseActivity parent;
     protected SharedViewModel model;
-
-    public BaseFragment() {
-        model = ViewModelProviders.of(this).get(SharedViewModel.class);
-        parent = (BaseActivity) getActivity();
-    }
 
     protected void showErrorMessage(String message) {
         parent.simpleSnackBarMessage(message);

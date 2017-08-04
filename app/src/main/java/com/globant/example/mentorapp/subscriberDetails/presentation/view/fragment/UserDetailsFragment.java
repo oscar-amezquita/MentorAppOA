@@ -2,6 +2,7 @@ package com.globant.example.mentorapp.subscriberDetails.presentation.view.fragme
 
 
 import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DividerItemDecoration;
@@ -15,6 +16,8 @@ import android.widget.TextView;
 
 import com.globant.example.mentorapp.MentorApplication;
 import com.globant.example.mentorapp.R;
+import com.globant.example.mentorapp.data.livedata.SharedViewModel;
+import com.globant.example.mentorapp.mvp.base.BaseActivity;
 import com.globant.example.mentorapp.mvp.base.BaseFragment;
 import com.globant.example.mentorapp.mvp.base.BaseView;
 import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryModel;
@@ -60,6 +63,8 @@ public class UserDetailsFragment extends BaseFragment implements BaseView<UserDe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_details, container, false);
+        model = ViewModelProviders.of(this).get(SharedViewModel.class);
+        parent = (BaseActivity) getActivity();
         listReposRecyclerView = (RecyclerView) view.findViewById(R.id.list_repo_container);
         userName = (TextView) view.findViewById(R.id.txtUserName);
         userLocation = (TextView) view.findViewById(R.id.txtLocation);
