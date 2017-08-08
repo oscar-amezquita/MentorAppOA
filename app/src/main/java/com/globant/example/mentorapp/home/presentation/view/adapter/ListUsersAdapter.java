@@ -55,7 +55,7 @@ public class ListUsersAdapter extends RecyclerView.Adapter<ListUsersAdapter.View
     }
 
     public interface SelectionListener {
-        void onUserSelected(String id);
+        void onUserSelected(String userName);
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

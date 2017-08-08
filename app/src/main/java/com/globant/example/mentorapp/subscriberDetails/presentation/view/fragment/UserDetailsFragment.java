@@ -48,6 +48,7 @@ public class UserDetailsFragment extends BaseFragment implements BaseView<UserDe
     private TextView following;
     private TextView totalRepositories;
     private ImageView userImageView;
+    private LinearLayoutManager layoutManager;
 
     public static UserDetailsFragment getInstance() {
         return new UserDetailsFragment();
@@ -66,6 +67,7 @@ public class UserDetailsFragment extends BaseFragment implements BaseView<UserDe
         model = ViewModelProviders.of(this).get(SharedViewModel.class);
         parent = (BaseActivity) getActivity();
         listReposRecyclerView = (RecyclerView) view.findViewById(R.id.list_repo_container);
+        layoutManager = new LinearLayoutManager(getActivity());
         userName = (TextView) view.findViewById(R.id.txtUserName);
         userLocation = (TextView) view.findViewById(R.id.txtLocation);
         company = (TextView) view.findViewById(R.id.txtCompany);
@@ -79,14 +81,14 @@ public class UserDetailsFragment extends BaseFragment implements BaseView<UserDe
             totalRepositories.setText(
                     String.format(getActivity().getString(R.string.tv_detail_repositories), model.getUserRepos().getValue().size()));
             userDetails = model.getUserDetails().getValue();
-            usersRepositoryListReady(listReposRecyclerView, listRepoAdapter);
+            usersRepositoryListReady();
             parent.hideProgress();
         }
         if (userDetails != null) {
             setUserInformation(userDetails);
         }
         if (listRepoAdapter != null) {
-            usersRepositoryListReady(listReposRecyclerView, listRepoAdapter);
+            usersRepositoryListReady();
         }
 
         listReposRecyclerView.setAdapter(listRepoAdapter);
@@ -103,17 +105,10 @@ public class UserDetailsFragment extends BaseFragment implements BaseView<UserDe
             model.setUserRepos(detailsViewModel.getUserRepos());
             totalRepositories.setText(
                     String.format(getActivity().getString(R.string.tv_detail_repositories), detailsViewModel.getUserRepos().size()));
-            usersRepositoryListReady(listReposRecyclerView, listRepoAdapter);
+            usersRepositoryListReady();
         }
         if (detailsViewModel.getError() != null) {
-            switch (detailsViewModel.getError()) {
-                case ERROR_CONNECTION:
-                    showErrorMessage(getString(R.string.communication_error_message));
-                    break;
-                case ERROR_RESPONSE:
-                    showErrorMessage(getString(R.string.http_error_message));
-                    break;
-            }
+            showErrorMessage(detailsViewModel.getError());
         }
         if (detailsViewModel.getProgress()) {
             parent.showProgress();
@@ -127,7 +122,7 @@ public class UserDetailsFragment extends BaseFragment implements BaseView<UserDe
             @Override
             public void onChanged(@Nullable List<RepositoryModel> repositoryViewModelList) {
                 listRepoAdapter = new UserRepositoriesAdapter(repositoryViewModelList);
-                usersRepositoryListReady(listReposRecyclerView, listRepoAdapter);
+                usersRepositoryListReady();
             }
         };
         model.getUserRepos().observe(this, usersObserver);
@@ -161,14 +156,13 @@ public class UserDetailsFragment extends BaseFragment implements BaseView<UserDe
                 .into(userImageView);
     }
 
-    private void usersRepositoryListReady(RecyclerView recyclerView, RecyclerView.Adapter adapter) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        recyclerView.addItemDecoration(
+    private void usersRepositoryListReady() {
+        listReposRecyclerView.addItemDecoration(
                 new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+        listReposRecyclerView.setHasFixedSize(true);
+        listReposRecyclerView.setLayoutManager(layoutManager);
+        listReposRecyclerView.setAdapter(listRepoAdapter);
+        listRepoAdapter.notifyDataSetChanged();
     }
 
     @Override

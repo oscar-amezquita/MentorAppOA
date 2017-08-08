@@ -71,16 +71,8 @@ public class ListUsersViewFragment extends BaseFragment implements BaseView<List
             model.setUsers(usersModel.getUsers());
             usersReady();
         } else if (usersModel.getError() != null) {
-            switch (usersModel.getError()) {
-                case ERROR_CONNECTION:
-                    showErrorMessage(getString(R.string.communication_error_message));
-                    break;
-                case ERROR_RESPONSE:
-                    showErrorMessage(getString(R.string.http_error_message));
-                    break;
-            }
+            showErrorMessage(usersModel.getError());
         }
-
         if (usersModel.getProgress()) {
             parent.showProgress();
         } else {
@@ -132,10 +124,10 @@ public class ListUsersViewFragment extends BaseFragment implements BaseView<List
     }
 
     @Override
-    public void onUserSelected(String userId) {
+    public void onUserSelected(String userName) {
         UserDetailsFragment detailsFragment = UserDetailsFragment.getInstance();
         Bundle bundle = new Bundle();
-        bundle.putString(getString(R.string.bundle_selected_user_id), userId);
+        bundle.putString(getString(R.string.bundle_selected_user_id), userName);
         detailsFragment.setArguments(bundle);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_container, detailsFragment)
