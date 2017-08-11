@@ -67,6 +67,9 @@ public class UserDetailsFragment extends BaseFragment implements BaseView<UserDe
         model = ViewModelProviders.of(this).get(SharedViewModel.class);
         parent = (BaseActivity) getActivity();
         listReposRecyclerView = (RecyclerView) view.findViewById(R.id.list_repo_container);
+        listReposRecyclerView.addItemDecoration(
+                new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+        listReposRecyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         userName = (TextView) view.findViewById(R.id.txtUserName);
         userLocation = (TextView) view.findViewById(R.id.txtLocation);
@@ -157,9 +160,6 @@ public class UserDetailsFragment extends BaseFragment implements BaseView<UserDe
     }
 
     private void usersRepositoryListReady() {
-        listReposRecyclerView.addItemDecoration(
-                new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
-        listReposRecyclerView.setHasFixedSize(true);
         listReposRecyclerView.setLayoutManager(layoutManager);
         listReposRecyclerView.setAdapter(listRepoAdapter);
         listRepoAdapter.notifyDataSetChanged();
