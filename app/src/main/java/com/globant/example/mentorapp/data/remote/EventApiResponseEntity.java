@@ -1,6 +1,4 @@
-package com.globant.example.mentorapp.home.domain.model;
-
-import com.squareup.otto.Produce;
+package com.globant.example.mentorapp.data.remote;
 
 /**
  * Class to manage otto responses from ApiClient
@@ -11,11 +9,11 @@ public class EventApiResponseEntity<T> {
 
     public static final int HTTP_OK = 200;
     public static final int CONNECTION_ERROR = -1;
-    private final int responseCode;
-    private final String responseText;
-    private final T data;
+    protected final int responseCode;
+    protected final String responseText;
+    protected T data;
 
-    private EventApiResponseEntity(Builder builder) {
+    protected EventApiResponseEntity(Builder builder) {
         this.responseCode = builder.responseCode;
         this.responseText = builder.responseText;
         this.data = (T) builder.data;
@@ -36,12 +34,11 @@ public class EventApiResponseEntity<T> {
     /**
      * {@code EventApiResponseEntity} builder static inner class.
      */
-    public static final class Builder<T> {
+    public static class Builder<T> {
         private int responseCode;
         private String responseText;
         private T data;
 
-        @Produce
         public EventApiResponseEntity build() {
             return new EventApiResponseEntity(this);
         }

@@ -9,7 +9,8 @@
     <string name="tv_detail_user_name">User Name: %s</string>
     <string name="tv_detail_location">Location: %s</string>
     <string name="tv_detail_company">Company: %s</string>
-    <string name="tv_detail_followers">Followers: %s</string>
-    <string name="tv_detail_following">Following: %s</string>
-    <string name="tv_detail_repositories">Repositories: %s</string>
+    <string name="tv_detail_followers">Followers: %d</string>
+    <string name="tv_detail_following">Following: %d</string>
+    <string name="tv_detail_repositories">Repositories: %d</string>
+    <string name="bundle_selected_user_id">userId</string>
 </resources>

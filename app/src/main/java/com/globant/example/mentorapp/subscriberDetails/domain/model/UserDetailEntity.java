@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
 public class UserDetailEntity {
 
     private String login;
-    private Integer id;
+    private int id;
     @SerializedName("avatar_url")
     private String avatarUrl;
     @SerializedName("gravatar_id")
@@ -47,11 +47,11 @@ public class UserDetailEntity {
     private Object hireable;
     private String bio;
     @SerializedName("public_repos")
-    private Integer publicRepos;
+    private int publicRepos;
     @SerializedName("public_gists")
-    private Integer publicGists;
-    private Integer followers;
-    private Integer following;
+    private int publicGists;
+    private int followers;
+    private int following;
     @SerializedName("created_at")
     private String createdAt;
     @SerializedName("updated_at")
@@ -61,7 +61,7 @@ public class UserDetailEntity {
         return login;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
@@ -153,19 +153,19 @@ public class UserDetailEntity {
         return bio;
     }
 
-    public Integer getPublicRepos() {
+    public int getPublicRepos() {
         return publicRepos;
     }
 
-    public Integer getPublicGists() {
+    public int getPublicGists() {
         return publicGists;
     }
 
-    public Integer getFollowers() {
+    public int getFollowers() {
         return followers;
     }
 
-    public Integer getFollowing() {
+    public int getFollowing() {
         return following;
     }
 

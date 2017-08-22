@@ -1,6 +1,5 @@
 package com.globant.example.mentorapp.subscriberDetails.presentation.view.adapter;
 
-import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +7,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.globant.example.mentorapp.R;
-import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryViewModel;
+import com.globant.example.mentorapp.subscriberDetails.presentation.model.RepositoryModel;
+import com.globant.example.mentorapp.util.Utilities;
 
 import java.util.List;
 
@@ -19,12 +19,10 @@ import java.util.List;
 
 public class UserRepositoriesAdapter extends RecyclerView.Adapter<UserRepositoriesAdapter.ViewHolder> {
 
-    private List<RepositoryViewModel> userRepositoriesAdapterList;
-    private Context context;
+    private List<RepositoryModel> userRepositoriesAdapterList;
 
-    public UserRepositoriesAdapter(List<RepositoryViewModel> userRepositoriesAdapterList, Context context) {
+    public UserRepositoriesAdapter(List<RepositoryModel> userRepositoriesAdapterList) {
         this.userRepositoriesAdapterList = userRepositoriesAdapterList;
-        this.context = context;
     }
 
     @Override
@@ -35,14 +33,14 @@ public class UserRepositoriesAdapter extends RecyclerView.Adapter<UserRepositori
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        RepositoryViewModel model = userRepositoriesAdapterList.get(position);
+        RepositoryModel model = userRepositoriesAdapterList.get(position);
         holder.repoNameTextView.setText(model.getRepoName());
         holder.repoURLTextView.setText(model.getRepoURL());
     }
 
     @Override
     public int getItemCount() {
-        return userRepositoriesAdapterList != null ? userRepositoriesAdapterList.size() : context.getResources().getInteger(R.integer.zero_constant);
+        return userRepositoriesAdapterList != null ? userRepositoriesAdapterList.size() : Utilities.ZERO_CONSTANT;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
@@ -50,10 +48,10 @@ public class UserRepositoriesAdapter extends RecyclerView.Adapter<UserRepositori
         private TextView repoNameTextView;
         private TextView repoURLTextView;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            repoNameTextView = (TextView) itemView.findViewById(R.id.textName);
-            repoURLTextView = (TextView) itemView.findViewById(R.id.textName);
+            repoNameTextView = (TextView) itemView.findViewById(R.id.repoName);
+            repoURLTextView = (TextView) itemView.findViewById(R.id.repoURL);
         }
     }
 }
